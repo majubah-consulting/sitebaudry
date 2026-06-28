@@ -223,9 +223,7 @@
     (function () {
       var tablets = [].slice.call(document.querySelectorAll(".mjb-tablet"));
       if (!tablets.length) return;
-      // Sur petits écrans (mobile) ou mouvement réduit : tablette à plat, pas d'effet 3D au scroll.
-      var flat = reduce || (window.innerWidth || document.documentElement.clientWidth) <= 700;
-      if (flat) { tablets.forEach(function (t) { t.style.transform = "none"; }); return; }
+      if (reduce) { tablets.forEach(function (t) { t.style.transform = "none"; }); return; }
       var ticking = false;
       function up() {
         ticking = false;
