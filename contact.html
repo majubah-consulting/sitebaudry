@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Contact | MAJUBAH Consulting</title>
-  <meta name="description" content="Contactez MAJUBAH Consulting (Baudry Bahuna) à Pont-Audemer pour la formation IA, le Campus numérique ou un atelier.">
-  <link rel="canonical" href="https://EXEMPLE-DOMAINE/contact.html">
+  <meta name="description" content="Contactez MAJUBAH Consulting (Baudry Bahuna) à Pont-Audemer pour la formation IA, la formation de formateurs, le Campus numérique ou un atelier.">
+  <link rel="canonical" href="https://majubah-consulting.github.io/sitebaudry/contact.html">
   <meta property="og:locale" content="fr_FR">
   <link rel="stylesheet" href="_ds/majubah-consulting-design-system-a0b60080-30af-45d8-a878-bd93d04e39d7/tokens/fonts.css">
   <link rel="stylesheet" href="_ds/majubah-consulting-design-system-a0b60080-30af-45d8-a878-bd93d04e39d7/tokens/colors.css">
@@ -43,10 +43,13 @@
 
 <main id="main" class="section">
   <div class="container grid grid--2">
+
+    <!-- Colonne gauche : coordonnées + accès rapides -->
     <div class="reveal">
       <p class="eyebrow">Contact</p>
       <h1 style="font-size:clamp(28px,4vw,44px);">Parlons de votre projet</h1>
-      <p class="lead">Une question sur la formation IA, le Campus numérique ou un atelier ? Écrivez-nous, nous répondons sous 48 heures ouvrées.</p>
+      <p class="lead">Une question sur une formation certifiante, le Campus numérique ou un atelier ? Écrivez-nous : nous répondons sous 48 heures ouvrées.</p>
+
       <div class="card" style="margin-top:24px;">
         <p style="margin:0 0 8px;font:700 16px var(--font-display);color:var(--text-strong);">MAJUBAH Consulting</p>
         <p style="margin:0 0 12px;color:var(--text-body);">Baudry Bahuna · <span data-mjb="location">Pont-Audemer, Normandie</span></p>
@@ -54,22 +57,68 @@
         <p style="margin:0;" data-mjb-optional="phone"><a data-mjb-href="phone" href="tel:"><span data-mjb="phone"></span></a></p>
         <p style="margin:8px 0 0;" data-mjb-optional="linkedin"><a data-mjb-href="linkedin" href="#" rel="noopener" target="_blank">LinkedIn</a></p>
       </div>
-    </div>
-    <div class="reveal">
-      <div class="card">
-        <h2 style="font-size:22px;">Que souhaitez-vous faire ?</h2>
-        <div style="display:flex;flex-direction:column;gap:12px;margin-top:16px;">
-          <a class="btn btn--primary" href="reserver.html">Réserver une place à la formation</a>
-          <a class="btn btn--secondary" href="reserver.html?besoin=equipe">Former mon équipe</a>
-          <a class="btn btn--secondary" href="reserver.html?besoin=campus">Rejoindre le Campus numérique</a>
-          <a class="btn btn--secondary" href="reserver.html?besoin=atelier">Participer à un atelier</a>
-        </div>
+
+      <div class="card" style="margin-top:16px;">
+        <h2 style="font-size:18px;">Accès rapides</h2>
+        <ul class="list-check" style="margin-top:12px;">
+          <li><a href="reserver.html">Réserver une place à la formation IA (3 jours)</a></li>
+          <li><a href="formation-creer-activite-formation.html">Découvrir la formation de formateurs (RS6977)</a></li>
+          <li><a href="campus-numerique.html">Rejoindre le Campus numérique</a></li>
+          <li><a href="ateliers-ia.html">Participer à un atelier</a></li>
+        </ul>
       </div>
+
       <div class="note" style="margin-top:16px;">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h0"/></svg>
         <span><strong>Accessibilité / situation de handicap :</strong> contactez-nous en amont, nous étudions ensemble les aménagements possibles pour vous accueillir dans les meilleures conditions.</span>
       </div>
     </div>
+
+    <!-- Colonne droite : formulaire de contact -->
+    <div class="reveal">
+      <div class="card">
+        <h2 style="font-size:22px;">Envoyez-nous un message</h2>
+        <form id="contactForm" novalidate style="margin-top:16px;">
+          <!-- anti-spam -->
+          <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;" aria-hidden="true">
+          <div class="field">
+            <label for="cName">Nom et prénom</label>
+            <input id="cName" name="name" type="text" autocomplete="name" required>
+          </div>
+          <div class="field">
+            <label for="cEmail">Adresse e-mail</label>
+            <input id="cEmail" name="email" type="email" autocomplete="email" required>
+          </div>
+          <div class="field">
+            <label for="cSubject">Sujet</label>
+            <select id="cSubject" name="sujet">
+              <option value="Formation IA — RS7344">Formation IA — RS7344</option>
+              <option value="Formation de formateurs — RS6977">Formation de formateurs — RS6977</option>
+              <option value="Campus numérique">Campus numérique</option>
+              <option value="Atelier">Atelier</option>
+              <option value="Former mon équipe">Former mon équipe</option>
+              <option value="Autre / question générale">Autre / question générale</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="cMessage">Votre message</label>
+            <textarea id="cMessage" name="message" rows="5" required></textarea>
+          </div>
+          <label class="newsletter__consent" style="justify-content:flex-start;margin:0 0 14px;">
+            <input type="checkbox" name="consent" required>
+            <span>J'accepte que mes informations soient utilisées pour traiter ma demande. <a href="politique-confidentialite.html" target="_blank" rel="noopener">Politique de confidentialité</a>.</span>
+          </label>
+          <p id="contactStatus" class="form-status" role="status" aria-live="assertive" style="min-height:1.2em;margin:0 0 12px;"></p>
+          <button type="submit" id="contactSubmit" class="btn btn--accent" style="width:100%;min-height:52px;">Envoyer mon message</button>
+        </form>
+        <div id="contactDone" hidden style="text-align:center;padding:8px 0;">
+          <span class="rsv-check-badge" style="display:inline-flex;width:52px;height:52px;align-items:center;justify-content:center;border-radius:50%;background:var(--color-success-bg);color:var(--color-success);margin-bottom:8px;"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg></span>
+          <h3>Message envoyé !</h3>
+          <p style="color:var(--text-body);">Merci, votre message est bien parti. Nous vous répondons sous 48 heures ouvrées.</p>
+        </div>
+      </div>
+    </div>
+
   </div>
 </main>
 
@@ -77,11 +126,74 @@
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand"><img src="assets/logo/majubah-horizontal-white.png" alt="MAJUBAH Consulting"><p style="color:var(--text-on-navy);max-width:42ch;">Former aujourd'hui les professionnels à travailler avec l'intelligence artificielle.</p><p style="color:var(--text-on-navy-muted);font-size:14px;">Baudry Bahuna · Pont-Audemer, Normandie</p></div>
-      <div class="footer-col"><h4>Navigation</h4><ul role="list"><li><a href="formation-ia.html">Formation IA</a></li><li><a href="campus-numerique.html">Campus numérique</a></li><li><a href="ateliers-ia.html">Ateliers</a></li><li><a href="reserver.html">Réserver une place</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div class="footer-col"><h4>Navigation</h4><ul role="list"><li><a href="formation-ia.html">Formation IA — RS7344</a></li><li><a href="formation-creer-activite-formation.html">Formation de formateurs — RS6977</a></li><li><a href="campus-numerique.html">Campus numérique</a></li><li><a href="ateliers-ia.html">Ateliers</a></li><li><a href="reserver.html">Réserver une place</a></li><li><a href="contact.html">Contact</a></li></ul></div>
       <div class="footer-col"><h4>Informations</h4><ul role="list"><li><a data-mjb-href="email" href="mailto:baudry@majubahconsulting.com"><span data-mjb="email">baudry@majubahconsulting.com</span></a></li><li><a href="mentions-legales.html">Mentions légales</a></li><li><a href="politique-confidentialite.html">Confidentialité</a></li><li><a href="conditions-generales.html">Conditions générales</a></li></ul></div>
     </div>
     <div class="footer-bottom"><span>© <span data-year>2026</span> MAJUBAH Consulting</span><span>Pont-Audemer, Normandie</span></div>
   </div>
 </footer>
+
+<script>
+(function () {
+  "use strict";
+  var cfg = window.MAJUBAH || {};
+  var WEB3FORMS_KEY = "5902293a-4b80-475b-b171-8456557d7251";
+  var form = document.getElementById("contactForm");
+  if (!form) return;
+  var statusEl = document.getElementById("contactStatus");
+  var btn = document.getElementById("contactSubmit");
+  var sending = false;
+
+  function emailOk(v) { return /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(String(v || "").trim()); }
+  function err(msg) { statusEl.setAttribute("data-kind", "error"); statusEl.innerHTML = msg; }
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    if (sending) return;
+    if (form.botcheck && form.botcheck.checked) return; // honeypot
+
+    var data = Object.fromEntries(new FormData(form).entries());
+    if (!String(data.name || "").trim()) { err("Indiquez votre nom."); form.elements["name"].focus(); return; }
+    if (!emailOk(data.email)) { err("Indiquez une adresse e-mail valide."); form.elements["email"].focus(); return; }
+    if (!String(data.message || "").trim()) { err("Écrivez votre message."); form.elements["message"].focus(); return; }
+    if (!form.elements["consent"].checked) { err("Vous devez accepter le traitement de vos informations."); return; }
+
+    sending = true; btn.disabled = true;
+    var label = btn.textContent; btn.textContent = "Envoi en cours…";
+    statusEl.removeAttribute("data-kind"); statusEl.textContent = "Envoi de votre message…";
+
+    var payload = {
+      access_key: WEB3FORMS_KEY,
+      subject: "Contact site — " + (data.sujet || "Message") + " — " + data.name,
+      from_name: "Site MAJUBAH — Contact",
+      replyto: data.email,
+      "Nom": data.name,
+      "E-mail": data.email,
+      "Sujet": data.sujet || "—",
+      "Message": data.message || "—"
+    };
+
+    fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Accept": "application/json" },
+      body: JSON.stringify(payload)
+    })
+      .then(function (r) { return r.json(); })
+      .then(function (j) {
+        if (j && j.success) {
+          form.hidden = true;
+          var done = document.getElementById("contactDone");
+          done.hidden = false; done.scrollIntoView({ behavior: "smooth", block: "center" });
+        } else { reset(label); }
+      })
+      .catch(function () { reset(label); });
+  });
+
+  function reset(label) {
+    sending = false; btn.disabled = false; btn.textContent = label;
+    err("Votre message n'a pas pu être envoyé. Réessayez, ou écrivez-nous à <a href=\"mailto:" + (cfg.email || "") + "\">" + (cfg.email || "") + "</a>.");
+  }
+})();
+</script>
 </body>
 </html>

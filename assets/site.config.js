@@ -57,7 +57,7 @@ window.MAJUBAH = {
   // Qualiopi : N'AFFICHER que si vérifié. Renseigner le numéro réel.
   qualiopi: {
     certified: true,
-    declarationNumber: "", // n° de déclaration d'activité (à confirmer)
+    declarationNumber: "11 75 68139 75", // n° de déclaration d'activité (préfet de région d'Île-de-France)
     mention: "Organisme de formation certifié Qualiopi",
   },
 

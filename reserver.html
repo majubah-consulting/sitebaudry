@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Préinscription Formation IA à Pont-Audemer | MAJUBAH</title>
   <meta name="description" content="Choisissez votre session de formation IA de trois jours à Pont-Audemer et envoyez votre demande de préinscription à MAJUBAH.">
-  <link rel="canonical" href="https://EXEMPLE-DOMAINE/reserver.html">
+  <link rel="canonical" href="https://majubah-consulting.github.io/sitebaudry/reserver.html">
   <link rel="stylesheet" href="_ds/majubah-consulting-design-system-a0b60080-30af-45d8-a878-bd93d04e39d7/tokens/fonts.css">
   <link rel="stylesheet" href="_ds/majubah-consulting-design-system-a0b60080-30af-45d8-a878-bd93d04e39d7/tokens/colors.css">
   <link rel="stylesheet" href="assets/site.css?v=3">
@@ -278,7 +278,7 @@
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand"><img src="assets/logo/majubah-horizontal-white.png" alt="MAJUBAH Consulting"><p style="color:var(--text-on-navy);max-width:42ch;">Former aujourd'hui les professionnels à travailler avec l'intelligence artificielle.</p><p style="color:var(--text-on-navy-muted);font-size:14px;">Baudry Bahuna · Pont-Audemer, Normandie</p></div>
-      <div class="footer-col"><h4>Navigation</h4><ul role="list"><li><a href="formation-ia.html">Formation IA</a></li><li><a href="campus-numerique.html">Campus numérique</a></li><li><a href="ateliers-ia.html">Ateliers</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div class="footer-col"><h4>Navigation</h4><ul role="list"><li><a href="formation-ia.html">Formation IA — RS7344</a></li><li><a href="formation-creer-activite-formation.html">Formation de formateurs — RS6977</a></li><li><a href="campus-numerique.html">Campus numérique</a></li><li><a href="ateliers-ia.html">Ateliers</a></li><li><a href="contact.html">Contact</a></li></ul></div>
       <div class="footer-col"><h4>Informations</h4><ul role="list"><li><a data-mjb-href="email" href="mailto:baudry@majubahconsulting.com"><span data-mjb="email">baudry@majubahconsulting.com</span></a></li><li><a href="mentions-legales.html">Mentions légales</a></li><li><a href="politique-confidentialite.html">Confidentialité</a></li><li><a href="conditions-generales.html">Conditions générales</a></li></ul></div>
     </div>
     <div class="footer-bottom"><span>© <span data-year>2026</span> MAJUBAH Consulting</span><span>Pont-Audemer, Normandie</span></div>
@@ -358,17 +358,31 @@
 
   function selectedSession() { return form.querySelector('input[name="session_id"]:checked'); }
 
-  // Affiche/masque le champ disponibilités + (dé)verrouille « Continuer » à l'étape 1
+  // Affiche/masque le champ disponibilités, (dé)verrouille « Continuer » à l'étape 1,
+  // et n'affiche « Envoyer ma préinscription » que lorsque l'étape 3 est complète.
   form.addEventListener("change", function (e) {
-    if (e.target && e.target.name === "session_id") {
+    if (!e.target) return;
+    if (e.target.name === "session_id") {
       altField.hidden = e.target.value !== "autre";
       updateNextEnabled();
+    }
+    if (e.target.name === "funding_type" || e.target.name === "consent_privacy") {
+      updateSubmitState();
     }
   });
 
   function updateNextEnabled() {
     if (current === 0) nextBtn.disabled = !selectedSession();
     else nextBtn.disabled = false;
+  }
+
+  // Étape 3 valide = un financement choisi ET le consentement RGPD coché
+  function step3Valid() {
+    return !!form.querySelector('input[name="funding_type"]:checked') && form.elements["consent_privacy"].checked;
+  }
+  // Le bouton d'envoi n'apparaît qu'à l'étape 3, une fois toutes les réponses fournies
+  function updateSubmitState() {
+    submitBtn.hidden = !(current === TOTAL - 1 && step3Valid());
   }
 
   // ---- Validation par étape ----
@@ -427,10 +441,10 @@
     stepMobile.textContent = "Étape " + (i + 1) + " sur " + TOTAL;
     prevBtn.hidden = i === 0;
     nextBtn.hidden = i === TOTAL - 1;
-    submitBtn.hidden = i !== TOTAL - 1;
     statusEl.textContent = ""; statusEl.removeAttribute("data-kind");
     if (i === 2) buildRecap();
     updateNextEnabled();
+    updateSubmitState();
     document.getElementById("formTop").scrollIntoView({ behavior: "smooth", block: "start" });
     if (i !== 0) {
       var f = panels[i].querySelector("input:not([type=hidden]),textarea,select");
