@@ -255,7 +255,7 @@
       <div id="confirmPanel" class="card" hidden style="text-align:center;">
         <span class="rsv-check-badge" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg></span>
         <h2>Votre demande a bien été envoyée</h2>
-        <p style="max-width:48ch;margin-inline:auto;">Merci. Vous recevrez immédiatement un récapitulatif par e-mail. Je vous recontacterai personnellement sous 48 heures pour confirmer la session et finaliser votre inscription.</p>
+        <p style="max-width:48ch;margin-inline:auto;">Merci, votre préinscription est bien enregistrée. Je vous recontacterai personnellement sous 48 heures pour confirmer la session et finaliser votre inscription.</p>
         <div class="rsv-confirm-recap">
           <ul role="list">
             <li><span>Participant</span><strong id="confirmName">—</strong></li>
@@ -273,6 +273,9 @@
     </div>
   </div>
 </main>
+
+<!-- Cible invisible : l'envoi vers Brevo charge sa réponse ici, sans rediriger le visiteur -->
+<iframe id="brevoSink" name="brevoSink" title="Envoi Brevo" style="display:none;width:0;height:0;border:0;" aria-hidden="true"></iframe>
 
 <footer class="site-footer">
   <div class="container">
@@ -463,6 +466,53 @@
   }
   function sessionById(id) { for (var k = 0; k < SESSIONS.length; k++) if (SESSIONS[k].id === id) return SESSIONS[k]; return null; }
 
+  // ---- Intégration Brevo (formulaire hébergé, sans clé API) ----
+  var BREVO_ACTION = "https://b3b996fd.sibforms.com/serve/MUIFAPyLxyiKw1kVbVyOE-3YyTMrvbPRdu5fbCQT1sCvhXNKY9KDYJ1gDFA5-9KpZ96qarZZu2FOuRk-0wMtMPBBag5Gn18LfdqSEdEIxHa7hdI8LS55VOJuMkqj57QxiyDXHy4LetP0Ua0b2I7XBmpoeZM5a8N6zXI3YEb2gzZDbGf4ulJuyaJXj4j_DtHLUgfAryd7kNLuffL_Ug==";
+
+  var FUNDING_LABELS = {
+    personnel: "Financement personnel",
+    entreprise: "Financement par mon entreprise",
+    cpf: "CPF",
+    opco: "OPCO ou autre financement à étudier",
+    inconnu: "Je ne sais pas encore"
+  };
+
+  // Normalise un numéro français pour le champ téléphone Brevo (national, sans le 0).
+  function frPhoneNational(raw) {
+    var d = String(raw || "").replace(/\D/g, "");
+    if (d.indexOf("0033") === 0) d = d.slice(4);
+    else if (d.indexOf("33") === 0 && d.length >= 11) d = d.slice(2);
+    if (d.charAt(0) === "0") d = d.slice(1);
+    return d;
+  }
+
+  // Envoie les champs vers Brevo via un POST natif ciblant l'iframe invisible
+  // (pas de redirection, fonctionne sur GitHub Pages, aucune clé exposée).
+  function sendToBrevo(fields, done) {
+    var iframe = document.getElementById("brevoSink");
+    var settled = false, timer;
+    function finish(ok) {
+      if (settled) return; settled = true;
+      iframe.removeEventListener("load", onLoad);
+      window.clearTimeout(timer);
+      done(ok);
+    }
+    function onLoad() { finish(true); }
+    var f = document.createElement("form");
+    f.action = BREVO_ACTION; f.method = "POST"; f.target = "brevoSink"; f.style.display = "none";
+    f.setAttribute("accept-charset", "UTF-8");
+    Object.keys(fields).forEach(function (k) {
+      var inp = document.createElement("input");
+      inp.type = "hidden"; inp.name = k; inp.value = fields[k] == null ? "" : String(fields[k]);
+      f.appendChild(inp);
+    });
+    document.body.appendChild(f);
+    iframe.addEventListener("load", onLoad);
+    timer = window.setTimeout(function () { finish(true); }, 5000); // repli si l'évènement load ne se déclenche pas
+    try { f.submit(); } catch (_) { finish(false); }
+    window.setTimeout(function () { if (f.parentNode) f.parentNode.removeChild(f); }, 7000);
+  }
+
   // ---- Envoi ----
   form.addEventListener("submit", function (e) {
     e.preventDefault();
@@ -489,36 +539,45 @@
     var sess = selectedSession();
     var obj = sess ? sessionById(sess.value) : null;
     var data = Object.fromEntries(new FormData(form).entries());
-    // Valeurs implicites de ce tunnel (présentiel · formation 3 jours)
-    data.offer_interest = "formation";
-    data.preferred_mode = "in_person";
-    data.session_id = sess ? sess.value : "";
-    data.session_label = obj ? obj.label : (sess && sess.value === "autre" ? "Aucune date proposée — disponibilités à étudier" : "");
-    data.lead_source = "site-reservation";
-    data.consent_privacy = consent.checked;
-    data.consent_marketing = form.elements["consent_marketing"].checked;
-    data.created_at = new Date().toISOString();
 
-    fetch("/api/reservation", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) })
-      .then(function (r) { if (!r.ok) throw new Error(String(r.status)); return r.json().catch(function () { return {}; }); })
-      .then(function () { showConfirmation(data, obj); })
-      .catch(function () {
-        sending = false;
-        submitBtn.disabled = false; prevBtn.disabled = false;
-        submitBtn.textContent = "Réessayer";
-        statusEl.setAttribute("data-kind", "error");
-        statusEl.innerHTML = "Votre demande n'a pas pu être envoyée. Vos informations sont conservées : cliquez sur « Réessayer », ou écrivez-nous à <a href=\"mailto:" + (cfg.email || "") + "\">" + (cfg.email || "") + "</a>.";
-      });
+    // Valeur « SESSION » envoyée à Brevo : libellé lisible, ou disponibilités saisies
+    var sessionValue = obj ? obj.label
+      : (sess && sess.value === "autre"
+          ? (data.availability && data.availability.trim()
+              ? "Aucune des dates proposées — disponibilités : " + data.availability.trim()
+              : "Aucune des dates proposées — à recontacter")
+          : "");
+    data.session_label = sessionValue;
+
+    // Mapping vers les champs exacts du formulaire Brevo
+    sendToBrevo({
+      EMAIL: (data.email || "").trim(),
+      PRENOM: (data.first_name || "").trim(),
+      NOM: (data.last_name || "").trim(),
+      LANDLINE_NUMBER: frPhoneNational(data.phone),
+      LANDLINE_NUMBER__COUNTRY_CODE: "+33",
+      JOB_TITLE: (data.job_title || "").trim() || "Non précisé",
+      SESSION: sessionValue,
+      FINANCEMENT: FUNDING_LABELS[data.funding_type] || data.funding_type || "—",
+      email_address_check: "", // honeypot Brevo : doit rester vide
+      locale: "fr"
+    }, function (ok) {
+      if (ok) { showConfirmation(data, obj); return; }
+      sending = false;
+      submitBtn.disabled = false; prevBtn.disabled = false;
+      submitBtn.textContent = "Réessayer";
+      statusEl.setAttribute("data-kind", "error");
+      statusEl.innerHTML = "Votre demande n'a pas pu être envoyée. Vos informations sont conservées : cliquez sur « Réessayer », ou écrivez-nous à <a href=\"mailto:" + (cfg.email || "") + "\">" + (cfg.email || "") + "</a>.";
+    });
   });
 
   function showConfirmation(data, obj) {
     var name = ((data.first_name || "") + " " + (data.last_name || "")).trim();
-    var sessionText = obj ? obj.label
-      : ("À définir selon vos disponibilités" + (data.availability ? (" (" + data.availability + ")") : ""));
-    var fundingLabels = { personnel: "Financement personnel", entreprise: "Financement par mon entreprise", cpf: "CPF", opco: "OPCO ou autre financement à étudier", inconnu: "Je ne sais pas encore" };
+    var sessionText = data.session_label
+      || (obj ? obj.label : ("À définir selon vos disponibilités" + (data.availability ? (" (" + data.availability + ")") : "")));
     document.getElementById("confirmName").textContent = name || "—";
     document.getElementById("confirmSession").textContent = sessionText;
-    document.getElementById("confirmFunding").textContent = fundingLabels[data.funding_type] || "—";
+    document.getElementById("confirmFunding").textContent = FUNDING_LABELS[data.funding_type] || "—";
 
     document.getElementById("formPanel").hidden = true;
     document.querySelector(".rsv-progress").hidden = true;
