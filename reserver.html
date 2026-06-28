@@ -500,6 +500,9 @@
     function onLoad() { finish(true); }
     var f = document.createElement("form");
     f.action = BREVO_ACTION; f.method = "POST"; f.target = "brevoSink"; f.style.display = "none";
+    // Le endpoint Brevo v2 exige multipart/form-data (refuse l'urlencoded par défaut)
+    f.enctype = "multipart/form-data";
+    f.setAttribute("enctype", "multipart/form-data");
     f.setAttribute("accept-charset", "UTF-8");
     Object.keys(fields).forEach(function (k) {
       var inp = document.createElement("input");
