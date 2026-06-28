@@ -9,7 +9,7 @@ window.MAJUBAH = {
   founder: "Baudry Bahuna",
   location: "Pont-Audemer, Normandie",
   // Coordonnées : reprises du projet existant. Compléter / corriger si besoin.
-  email: "baudry@majubah.com",
+  email: "baudry@majubahconsulting.com",
   phone: "", // laisser vide tant que non public (n'affiche rien si vide)
   linkedin: "https://www.linkedin.com/in/baudry-bahuna/", // profil LinkedIn de Baudry
   campusUrl: "https://majubah.teachizy.fr/formations/campus-ia",
