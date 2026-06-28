@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Réserver une place | Formation IA MAJUBAH</title>
+  <meta name="description" content="Demande de préinscription à la formation IA de MAJUBAH : choisissez votre modalité et vos disponibilités. Réponse sous 48 heures ouvrées.">
+  <meta name="robots" content="noindex">
+  <link rel="canonical" href="https://EXEMPLE-DOMAINE/reserver.html">
+  <link rel="stylesheet" href="_ds/majubah-consulting-design-system-a0b60080-30af-45d8-a878-bd93d04e39d7/tokens/fonts.css">
+  <link rel="stylesheet" href="_ds/majubah-consulting-design-system-a0b60080-30af-45d8-a878-bd93d04e39d7/tokens/colors.css">
+  <link rel="stylesheet" href="assets/site.css">
+  <style>
+    .steps { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:28px; list-style:none; }
+    .steps li { font:700 12px var(--font-body); letter-spacing:.04em; color:var(--text-muted); padding:8px 12px; border-radius:999px; background:var(--surface-muted); border:1px solid var(--border-subtle); }
+    .steps li[aria-current="step"] { color:#fff; background:var(--primary); border-color:var(--primary); }
+    .steps li.done { color:var(--color-success); border-color:var(--color-success); }
+    .step { display:none; }
+    .step.is-active { display:block; }
+    .opt { display:block; border:1px solid var(--border-default); border-radius:var(--radius); padding:14px 16px; margin-bottom:10px; cursor:pointer; font-weight:600; color:var(--text-strong); }
+    .opt:hover { border-color:var(--primary); }
+    .opt input { margin-right:10px; }
+    .opt:has(input:checked) { border-color:var(--primary); box-shadow:0 0 0 2px var(--focus-ring); }
+    .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:0 18px; }
+    @media (max-width:560px){ .grid2 { grid-template-columns:1fr; } }
+    .step-actions { display:flex; justify-content:space-between; gap:12px; margin-top:24px; }
+    .hp { position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden; }
+  </style>
+  <script defer src="assets/site.config.js"></script>
+  <script defer src="assets/site.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Aller au contenu</a>
+
+<header class="site-header">
+  <div class="container">
+    <nav class="nav" data-open="false" aria-label="Navigation principale">
+      <a class="nav__logo" href="index.html" aria-label="MAJUBAH Consulting — accueil"><img src="assets/logo/majubah-horizontal.png" alt="MAJUBAH Consulting"></a>
+      <ul class="nav__menu" role="list">
+        <li><a class="nav__link" href="formation-ia.html">Formation IA</a></li>
+        <li><a class="nav__link" href="campus-numerique.html">Campus numérique</a></li>
+        <li><a class="nav__link" href="ateliers-ia.html">Ateliers</a></li>
+        <li><a class="nav__link" href="contact.html">Contact</a></li>
+      </ul>
+      <div class="nav__cta">
+        <a class="nav__campus" data-mjb-href="campusUrl" href="https://majubah-campus.com" rel="noopener">Accéder au Campus</a>
+        <a class="btn btn--primary" href="reserver.html" aria-current="page">Réserver une place</a>
+      </div>
+      <button class="nav__toggle" type="button" aria-expanded="false" aria-label="Ouvrir le menu"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="section">
+  <div class="container" style="max-width:720px;">
+    <div class="reveal" style="margin-bottom:8px;"><p class="eyebrow">Demande de réservation</p><h1 style="font-size:clamp(28px,4vw,42px);">Réservez votre place</h1>
+      <p class="lead">Votre demande constitue une <strong>préinscription</strong>. Votre place sera définitive après confirmation de la session et validation de votre inscription.</p></div>
+
+    <!-- Panneau formulaire -->
+    <div id="formPanel">
+      <ol class="steps" aria-hidden="true">
+        <li data-dot="1" aria-current="step">Besoin</li><li data-dot="2">Modalité</li><li data-dot="3">Date</li><li data-dot="4">Coordonnées</li><li data-dot="5">Financement</li><li data-dot="6">Consentement</li>
+      </ol>
+
+      <form id="reserveForm" novalidate>
+        <!-- anti-spam -->
+        <div class="hp" aria-hidden="true"><label>Ne pas remplir <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+        <input type="hidden" name="utm_source"><input type="hidden" name="utm_medium"><input type="hidden" name="utm_campaign">
+
+        <!-- ÉTAPE 1 BESOIN -->
+        <fieldset class="step is-active" data-step="1" style="border:0;padding:0;margin:0;">
+          <legend style="font:600 20px var(--font-display);color:var(--text-strong);margin-bottom:14px;">Quel est votre besoin ?</legend>
+          <label class="opt"><input type="radio" name="offer_interest" value="formation" required>Participer à la formation IA de trois jours</label>
+          <label class="opt"><input type="radio" name="offer_interest" value="equipe">Former mon équipe</label>
+          <label class="opt"><input type="radio" name="offer_interest" value="campus">Rejoindre le Campus numérique</label>
+          <label class="opt"><input type="radio" name="offer_interest" value="atelier">Participer à un atelier</label>
+          <label class="opt"><input type="radio" name="offer_interest" value="autre">Poser une autre question</label>
+        </fieldset>
+
+        <!-- ÉTAPE 2 MODALITÉ -->
+        <fieldset class="step" data-step="2" style="border:0;padding:0;margin:0;">
+          <legend style="font:600 20px var(--font-display);color:var(--text-strong);margin-bottom:14px;">Quelle modalité ?</legend>
+          <label class="opt"><input type="radio" name="preferred_mode" value="in_person" required>Présentiel à Pont-Audemer</label>
+          <label class="opt"><input type="radio" name="preferred_mode" value="remote">Classe virtuelle</label>
+          <label class="opt"><input type="radio" name="preferred_mode" value="any">Indifférent — je souhaite connaître les prochaines possibilités</label>
+        </fieldset>
+
+        <!-- ÉTAPE 3 DATE -->
+        <fieldset class="step" data-step="3" style="border:0;padding:0;margin:0;">
+          <legend style="font:600 20px var(--font-display);color:var(--text-strong);margin-bottom:14px;">Choisissez une date</legend>
+          <div id="sessionsList"><!-- rempli par JS depuis la config --></div>
+          <div id="noSession" hidden>
+            <p>Aucune session n'est programmée à une date fixe pour le moment.</p>
+            <div class="field"><label for="availability">Indiquez vos périodes de disponibilité</label>
+              <textarea id="availability" name="availability" rows="3" placeholder="Ex. : 2ᵉ quinzaine de septembre, ou semaines 40-42…"></textarea></div>
+            <label class="opt" style="margin-top:6px;"><input type="checkbox" name="notify_dates" value="oui" checked>Je souhaite être informé des prochaines dates</label>
+          </div>
+        </fieldset>
+
+        <!-- ÉTAPE 4 COORDONNÉES -->
+        <fieldset class="step" data-step="4" style="border:0;padding:0;margin:0;">
+          <legend style="font:600 20px var(--font-display);color:var(--text-strong);margin-bottom:14px;">Vos coordonnées</legend>
+          <div class="grid2">
+            <div class="field"><label for="first_name">Prénom</label><input id="first_name" name="first_name" autocomplete="given-name" required></div>
+            <div class="field"><label for="last_name">Nom</label><input id="last_name" name="last_name" autocomplete="family-name" required></div>
+            <div class="field"><label for="company">Entreprise</label><input id="company" name="company" autocomplete="organization"></div>
+            <div class="field"><label for="job_title">Fonction</label><input id="job_title" name="job_title" autocomplete="organization-title"></div>
+            <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required></div>
+            <div class="field"><label for="phone">Téléphone</label><input id="phone" name="phone" type="tel" autocomplete="tel"></div>
+            <div class="field"><label for="city">Ville ou code postal</label><input id="city" name="city" autocomplete="address-level2"></div>
+          </div>
+          <div class="field"><label for="message">Message (facultatif)</label><textarea id="message" name="message" rows="3"></textarea></div>
+        </fieldset>
+
+        <!-- ÉTAPE 5 FINANCEMENT -->
+        <fieldset class="step" data-step="5" style="border:0;padding:0;margin:0;">
+          <legend style="font:600 20px var(--font-display);color:var(--text-strong);margin-bottom:14px;">Financement envisagé</legend>
+          <label class="opt"><input type="radio" name="funding_type" value="personnel" required>Financement personnel</label>
+          <label class="opt"><input type="radio" name="funding_type" value="entreprise">Financement par mon entreprise</label>
+          <label class="opt"><input type="radio" name="funding_type" value="cpf">CPF</label>
+          <label class="opt"><input type="radio" name="funding_type" value="opco">OPCO ou autre financement à étudier</label>
+          <label class="opt"><input type="radio" name="funding_type" value="inconnu">Je ne sais pas encore</label>
+          <p class="muted" style="font-size:13px;margin-top:10px;">L'acceptation d'un financement dépend de votre situation et des règles en vigueur ; nous ne pouvons pas la garantir.</p>
+        </fieldset>
+
+        <!-- ÉTAPE 6 CONSENTEMENT -->
+        <fieldset class="step" data-step="6" style="border:0;padding:0;margin:0;">
+          <legend style="font:600 20px var(--font-display);color:var(--text-strong);margin-bottom:14px;">Consentement</legend>
+          <label class="opt"><input type="checkbox" name="consent_privacy" value="oui" required>J'accepte que ma demande soit traitée par MAJUBAH. Voir la <a href="politique-confidentialite.html" target="_blank" rel="noopener">politique de confidentialité</a>.</label>
+          <label class="opt"><input type="checkbox" name="consent_marketing" value="oui">J'accepte de recevoir des informations sur les prochaines sessions (facultatif).</label>
+        </fieldset>
+
+        <p id="formStatus" class="form-status" role="status" aria-live="polite" style="min-height:1.2em;"></p>
+        <div class="step-actions">
+          <button type="button" class="btn btn--secondary" id="prevBtn" hidden>Précédent</button>
+          <span style="flex:1"></span>
+          <button type="button" class="btn btn--primary" id="nextBtn">Suivant</button>
+          <button type="submit" class="btn btn--accent" id="submitBtn" hidden>Envoyer ma demande</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Panneau confirmation -->
+    <div id="confirmPanel" class="card" hidden style="text-align:center;">
+      <span style="display:inline-flex;width:56px;height:56px;align-items:center;justify-content:center;border-radius:50%;background:var(--color-success-bg);color:var(--color-success);margin-bottom:8px;"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg></span>
+      <h2>Votre demande a bien été transmise.</h2>
+      <p style="max-width:46ch;margin-inline:auto;">Baudry ou un membre de MAJUBAH vous recontactera personnellement sous 48 heures ouvrées. Votre place sera définitive après confirmation de la session et validation de votre inscription.</p>
+      <div id="confirmSummary" style="text-align:left;max-width:420px;margin:20px auto;font-size:15px;color:var(--text-body);"></div>
+      <a class="btn btn--secondary" href="index.html">Revenir à l'accueil</a>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><img src="assets/logo/majubah-horizontal-white.png" alt="MAJUBAH Consulting"><p style="color:var(--text-on-navy);max-width:42ch;">Former aujourd'hui les professionnels à travailler avec l'intelligence artificielle.</p><p style="color:var(--text-on-navy-muted);font-size:14px;">Baudry Bahuna · Pont-Audemer, Normandie</p></div>
+      <div class="footer-col"><h4>Navigation</h4><ul role="list"><li><a href="formation-ia.html">Formation IA</a></li><li><a href="campus-numerique.html">Campus numérique</a></li><li><a href="ateliers-ia.html">Ateliers</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div class="footer-col"><h4>Informations</h4><ul role="list"><li><a data-mjb-href="email" href="mailto:baudry@majubah.com"><span data-mjb="email">baudry@majubah.com</span></a></li><li><a href="mentions-legales.html">Mentions légales</a></li><li><a href="politique-confidentialite.html">Confidentialité</a></li><li><a href="conditions-generales.html">Conditions générales</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span>© <span data-year>2026</span> MAJUBAH Consulting</span><span>Pont-Audemer, Normandie</span></div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+  var cfg = window.MAJUBAH || {};
+  var form = document.getElementById("reserveForm");
+  var steps = Array.prototype.slice.call(form.querySelectorAll(".step"));
+  var dots = Array.prototype.slice.call(document.querySelectorAll(".steps li"));
+  var prevBtn = document.getElementById("prevBtn"), nextBtn = document.getElementById("nextBtn"), submitBtn = document.getElementById("submitBtn");
+  var statusEl = document.getElementById("formStatus");
+  var current = 0;
+
+  // Préremplir le besoin depuis ?besoin=
+  var qs = new URLSearchParams(location.search);
+  var besoin = qs.get("besoin");
+  var besoinMap = { equipe:"equipe", campus:"campus", atelier:"atelier", programme:"formation" };
+  if (besoin && besoinMap[besoin]) {
+    var r = form.querySelector('input[name="offer_interest"][value="'+besoinMap[besoin]+'"]');
+    if (r) r.checked = true;
+  }
+  // UTM
+  ["utm_source","utm_medium","utm_campaign"].forEach(function(k){ var v=qs.get(k); if(v) form.querySelector('input[name="'+k+'"]').value=v; });
+
+  // Étape 3 : sessions depuis la config
+  (function renderSessions(){
+    var list = document.getElementById("sessionsList"), none = document.getElementById("noSession");
+    var sessions = (cfg.sessions || []).filter(function(s){ return s.status !== "cancelled"; });
+    if (!sessions.length) { none.hidden = false; return; }
+    var labelMode = { in_person:"Présentiel · Pont-Audemer", remote:"Classe virtuelle" };
+    var labelStatus = { pre_registration_open:"Préinscriptions ouvertes", confirmed:"Session confirmée", full:"Complet" };
+    sessions.forEach(function(s){
+      var disabled = s.status === "full";
+      var l = document.createElement("label"); l.className = "opt";
+      l.innerHTML = '<input type="radio" name="session_id" value="'+s.id+'"'+(disabled?" disabled":"")+'> '
+        + '<strong>'+ (s.startDate||"") + (s.endDate?(" → "+s.endDate):"") +'</strong> — '+(labelMode[s.mode]||s.mode)
+        + ' <span class="badge" style="margin-left:6px;">'+(labelStatus[s.status]||s.status)+'</span>';
+      list.appendChild(l);
+    });
+    var wait = document.createElement("label"); wait.className="opt";
+    wait.innerHTML = '<input type="radio" name="session_id" value="liste_attente"> Aucune date ne me convient — je souhaite être informé des prochaines dates';
+    list.appendChild(wait);
+  })();
+
+  function show(i){
+    current = i;
+    steps.forEach(function(s,idx){ s.classList.toggle("is-active", idx===i); });
+    dots.forEach(function(d,idx){ d.removeAttribute("aria-current"); d.classList.toggle("done", idx<i); if(idx===i) d.setAttribute("aria-current","step"); });
+    prevBtn.hidden = i===0;
+    nextBtn.hidden = i===steps.length-1;
+    submitBtn.hidden = i!==steps.length-1;
+    statusEl.textContent = "";
+    var first = steps[i].querySelector("input,textarea,select"); if(first) first.focus();
+    document.getElementById("formPanel").scrollIntoView({ behavior:"smooth", block:"start" });
+  }
+  function validStep(i){
+    var fields = steps[i].querySelectorAll("[required]");
+    for (var j=0;j<fields.length;j++){ if(!fields[j].checkValidity()){ fields[j].reportValidity(); return false; } }
+    return true;
+  }
+  nextBtn.addEventListener("click", function(){ if(validStep(current)) show(Math.min(current+1, steps.length-1)); });
+  prevBtn.addEventListener("click", function(){ show(Math.max(current-1,0)); });
+
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    if(!validStep(current)) return;
+    if(form.website.value){ return; } // honeypot
+    submitBtn.disabled = true; statusEl.removeAttribute("data-kind"); statusEl.textContent = "Envoi en cours…";
+    var data = Object.fromEntries(new FormData(form).entries());
+    data.lead_source = "site-reservation";
+    data.consent_privacy = form.consent_privacy.checked;
+    data.consent_marketing = form.consent_marketing.checked;
+    data.created_at = new Date().toISOString();
+    fetch("/api/reservation", { method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify(data) })
+      .then(function(r){ if(!r.ok) throw new Error(String(r.status)); return r.json().catch(function(){return{};}); })
+      .then(function(){ showConfirmation(data); })
+      .catch(function(){
+        submitBtn.disabled = false;
+        statusEl.setAttribute("data-kind","error");
+        statusEl.innerHTML = 'Une erreur est survenue. Réessayez, ou écrivez-nous à <a href="mailto:'+(cfg.email||"")+'">'+(cfg.email||"")+'</a>.';
+      });
+  });
+
+  function showConfirmation(data){
+    var mode = { in_person:"Présentiel à Pont-Audemer", remote:"Classe virtuelle", any:"Indifférent" }[data.preferred_mode] || "—";
+    var offer = { formation:"Formation IA 3 jours", equipe:"Former mon équipe", campus:"Campus numérique", atelier:"Atelier", autre:"Autre question" }[data.offer_interest] || "—";
+    document.getElementById("confirmSummary").innerHTML =
+      "<strong>Récapitulatif</strong><br>Besoin : "+offer+"<br>Modalité : "+mode+
+      (data.session_id ? "<br>Session : "+data.session_id : "") +
+      (data.availability ? "<br>Disponibilités : "+escapeHtml(data.availability) : "") +
+      "<br><br><strong>Prochaine étape :</strong> nous vous recontactons sous 48 h ouvrées.";
+    document.getElementById("formPanel").hidden = true;
+    var c = document.getElementById("confirmPanel"); c.hidden = false; c.scrollIntoView({behavior:"smooth"}); c.focus && c.setAttribute("tabindex","-1"), c.focus();
+  }
+  function escapeHtml(t){ return String(t).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+})();
+</script>
+</body>
+</html>

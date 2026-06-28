@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/majubah-consulting-design-system-a0b60080-30af-45d8-a878-bd93d04e39d7/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/majubah-consulting-design-system-a0b60080-30af-45d8-a878-bd93d04e39d7/tokens/colors.css">
+<link rel="stylesheet" href="_ds/majubah-consulting-design-system-a0b60080-30af-45d8-a878-bd93d04e39d7/tokens/typography.css">
+<link rel="stylesheet" href="_ds/majubah-consulting-design-system-a0b60080-30af-45d8-a878-bd93d04e39d7/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/majubah-consulting-design-system-a0b60080-30af-45d8-a878-bd93d04e39d7/tokens/effects.css">
+<link rel="stylesheet" href="_ds/majubah-consulting-design-system-a0b60080-30af-45d8-a878-bd93d04e39d7/tokens/base.css">
+<link rel="stylesheet" href="_ds/majubah-consulting-design-system-a0b60080-30af-45d8-a878-bd93d04e39d7/styles.css">
+<script src="_ds/majubah-consulting-design-system-a0b60080-30af-45d8-a878-bd93d04e39d7/_ds_bundle.js"></script>
+<!-- Runtime Spline (web component) — permet d'afficher une scène 3D dans ce site HTML statique -->
+<script type="module" src="https://unpkg.com/@splinetool/viewer@1.10.34/build/spline-viewer.js"></script>
+<style>
+  html{ scroll-behavior:smooth; }
+  body{ margin:0; background:#fff; -webkit-font-smoothing:antialiased; }
+  *{ box-sizing:border-box; }
+  ::selection{ background:rgba(80,123,140,.22); }
+  @keyframes mjbDrift1{ 0%,100%{ transform:translate(0,0) scale(1); } 50%{ transform:translate(46px,-34px) scale(1.12); } }
+  @keyframes mjbDrift2{ 0%,100%{ transform:translate(0,0) scale(1); } 50%{ transform:translate(-52px,38px) scale(1.16); } }
+  @keyframes mjbDrift3{ 0%,100%{ transform:translate(0,0) scale(1); } 50%{ transform:translate(34px,30px) scale(1.08); } }
+  @keyframes mjbFloat{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-13px); } }
+  @keyframes mjbSpin{ to{ transform:rotate(360deg); } }
+  @keyframes mjbRise{ from{ opacity:0; transform:translateY(16px); } to{ opacity:1; transform:translateY(0); } }
+  @keyframes mjbBlink{ 0%,50%{ opacity:1; } 50.01%,100%{ opacity:0; } }
+  @keyframes mjbMarquee{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
+  @media (prefers-reduced-motion: reduce){ *{ animation:none !important; } html{ scroll-behavior:auto; } }
+</style>
+</helmet>
+
+<div style="font-family:var(--font-body);color:var(--text-strong);background:#fff;position:relative;overflow-x:hidden;">
+
+  <!-- ============ HEADER ============ -->
+  <header style="position:sticky;top:0;z-index:50;backdrop-filter:saturate(140%) blur(14px);background:rgba(255,255,255,.78);border-bottom:1px solid var(--border-subtle);">
+    <div style="width:100%;max-width:1180px;margin:0 auto;padding:14px clamp(20px,6vw,64px);display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;">
+      <a href="#top" style="display:inline-flex;align-items:center;text-decoration:none;">
+        <div role="img" aria-label="MAJUBAH Consulting" style="width:114px;height:28px;background:url('assets/logo/majubah-horizontal.png') left center/contain no-repeat;"></div>
+      </a>
+      <nav style="display:flex;align-items:center;gap:clamp(14px,2.4vw,30px);">
+        <a href="#formateur" style="font:600 14px var(--font-body);color:var(--text-body);text-decoration:none;letter-spacing:.01em;" style-hover="color:var(--text-strong);">Le formateur</a>
+        <a href="#formation" style="font:600 14px var(--font-body);color:var(--text-body);text-decoration:none;letter-spacing:.01em;" style-hover="color:var(--text-strong);">La formation</a>
+        <a href="#contact" style="font:600 14px var(--font-body);color:var(--text-body);text-decoration:none;letter-spacing:.01em;" style-hover="color:var(--text-strong);">Contact</a>
+        <x-import component-from-global-scope="MAJUBAHConsultingDesignSystem_a0b600.Button" variant="primary" size="sm" href="#contact" hint-size="120px,36px">Me contacter</x-import>
+      </nav>
+    </div>
+  </header>
+
+  <span id="top"></span>
+
+  <!-- ============ HERO — VARIANT 1 : CENTRÉ ============ -->
+  <sc-if value="{{ isV1 }}" hint-placeholder-val="{{ true }}">
+  <!-- Hero : robot Spline en grand tout en haut (effet wahou), texte sur fond blanc -->
+  <section data-screen-label="Hero" style="position:relative;overflow:hidden;background:#fff;padding:clamp(28px,4vw,52px) 0 clamp(56px,9vw,100px);">
+    <sc-if value="{{ motion }}" hint-placeholder-val="{{ true }}">
+    <div aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;z-index:0;">
+      <div style="position:absolute;top:-6%;left:10%;width:480px;height:480px;border-radius:50%;filter:blur(92px);opacity:.18;background:radial-gradient(circle at 30% 30%, #507b8c, transparent 70%);animation:mjbDrift1 18s var(--ease-standard) infinite;"></div>
+      <div style="position:absolute;top:4%;right:6%;width:520px;height:520px;border-radius:50%;filter:blur(98px);opacity:.15;background:radial-gradient(circle at 60% 40%, #416573, transparent 70%);animation:mjbDrift2 22s var(--ease-standard) infinite;"></div>
+    </div>
+    </sc-if>
+
+    <div style="position:relative;z-index:1;width:100%;max-width:1180px;margin:0 auto;padding:0 clamp(20px,6vw,64px);display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:clamp(32px,5vw,64px);align-items:center;">
+
+      <!-- COLONNE GAUCHE : texte -->
+      <div style="text-align:left;">
+        <!-- Badge -->
+        <div style="display:inline-flex;align-items:center;gap:10px;padding:7px 16px;border:1px solid var(--border-subtle);border-radius:999px;background:rgba(255,255,255,.7);font:700 12px var(--font-body);letter-spacing:.14em;text-transform:uppercase;color:var(--color-bleu-acier);margin-bottom:24px;">
+          <span style="width:6px;height:6px;border-radius:50%;background:var(--accent);"></span>Formation intelligence artificielle
+        </div>
+
+        <!-- TITRE essentiel sur fond blanc — effet "génération IA" (typewriter) via #mjbHeroTitle -->
+        <h1 id="mjbHeroTitle" data-final="L'IA n'est plus une option. Apprenez à l'utiliser &lt;span style=&quot;border-bottom:3px solid var(--accent);padding-bottom:3px;white-space:nowrap;&quot;&gt;en 3 jours&lt;/span&gt;." style="font-family:var(--font-display);font-weight:600;font-size:clamp(34px,4.8vw,60px);line-height:1.06;letter-spacing:-.03em;color:var(--text-strong);margin:0;text-wrap:balance;min-height:1.06em;">
+          L'IA n'est plus une option. Apprenez à l'utiliser <span style="border-bottom:3px solid var(--accent);padding-bottom:3px;white-space:nowrap;">en 3 jours</span>.
+        </h1>
+
+        <!-- CTA -->
+        <div style="display:flex;flex-wrap:wrap;gap:14px;justify-content:flex-start;margin-top:34px;">
+          <x-import component-from-global-scope="MAJUBAHConsultingDesignSystem_a0b600.Button" variant="primary" size="lg" href="#formation" hint-size="240px,54px">Découvrir la formation</x-import>
+          <x-import component-from-global-scope="MAJUBAHConsultingDesignSystem_a0b600.Button" variant="secondary" size="lg" href="#contact" hint-size="160px,54px">Me contacter</x-import>
+        </div>
+        <p style="font:600 13px var(--font-body);letter-spacing:.04em;color:var(--text-muted);margin-top:24px;">Éligible CPF · Certifiante · Présentiel ou distanciel</p>
+      </div>
+
+      <!-- COLONNE DROITE : robot Spline (suit le curseur) -->
+      <!-- REMPLACEZ l'URL par VOTRE scène : Spline > Export > Web component -->
+      <div style="position:relative;width:100%;height:clamp(340px,56vh,580px);">
+        <spline-viewer url="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode" style="width:100%;height:100%;display:block;"></spline-viewer>
+        <!-- masque le filigrane "Built with Spline" (coin bas-droit) -->
+        <div aria-hidden="true" style="position:absolute;right:6px;bottom:6px;width:168px;height:46px;background:#fff;border-radius:8px;"></div>
+      </div>
+
+    </div>
+  </section>
+  </sc-if>
+
+  <!-- ============ HERO — VARIANT 2 : ASYMÉTRIQUE ============ -->
+  <sc-if value="{{ isV2 }}" hint-placeholder-val="{{ true }}">
+  <section data-screen-label="Hero" style="position:relative;overflow:hidden;padding:clamp(80px,11vw,128px) 0;">
+    <div style="position:relative;z-index:1;width:100%;max-width:1180px;margin:0 auto;padding:0 clamp(20px,6vw,64px);display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:clamp(40px,6vw,72px);align-items:center;">
+      <div>
+        <div style="display:inline-flex;align-items:center;gap:10px;font:700 12px var(--font-body);letter-spacing:.14em;text-transform:uppercase;color:var(--color-bleu-acier);margin-bottom:22px;">
+          <span style="width:6px;height:6px;border-radius:50%;background:var(--accent);"></span>Formation intelligence artificielle
+        </div>
+        <h1 style="font-family:var(--font-display);font-weight:600;font-size:clamp(32px,4.6vw,54px);line-height:1.1;letter-spacing:-.025em;color:var(--text-strong);margin:0;text-wrap:balance;">
+          L'intelligence artificielle n'est plus une option. Apprenez à l'utiliser <span style="border-bottom:3px solid var(--accent);padding-bottom:3px;white-space:nowrap;">en 3 jours</span>.
+        </h1>
+        <p style="font:400 clamp(16px,1.5vw,18px)/1.65 var(--font-body);color:var(--text-body);max-width:50ch;margin:24px 0 0;text-wrap:pretty;">
+          J'accompagne les dirigeants, salariés, indépendants et organismes de formation à intégrer concrètement l'IA dans leur activité grâce à une formation intensive, pratique et certifiante.
+        </p>
+        <div style="display:flex;flex-wrap:wrap;gap:14px;margin-top:34px;">
+          <x-import component-from-global-scope="MAJUBAHConsultingDesignSystem_a0b600.Button" variant="primary" size="lg" href="#formation" hint-size="240px,54px">Découvrir la formation</x-import>
+          <x-import component-from-global-scope="MAJUBAHConsultingDesignSystem_a0b600.Button" variant="secondary" size="lg" href="#contact" hint-size="160px,54px">Me contacter</x-import>
+        </div>
+      </div>
+      <div style="position:relative;border-radius:26px;background:linear-gradient(158deg,#194759,#0c2530);overflow:hidden;min-height:440px;box-shadow:var(--shadow-lg);">
+        <sc-if value="{{ motion }}" hint-placeholder-val="{{ true }}">
+        <div aria-hidden="true" style="position:absolute;inset:0;">
+          <div style="position:absolute;top:-12%;left:-6%;width:340px;height:340px;border-radius:50%;filter:blur(60px);opacity:.55;background:radial-gradient(circle, #507b8c, transparent 70%);animation:mjbDrift1 16s var(--ease-standard) infinite;"></div>
+          <div style="position:absolute;bottom:-16%;right:-8%;width:380px;height:380px;border-radius:50%;filter:blur(70px);opacity:.5;background:radial-gradient(circle, #416573, transparent 70%);animation:mjbDrift2 20s var(--ease-standard) infinite;"></div>
+        </div>
+        <img src="assets/logo/sigle-white.png" alt="" aria-hidden="true" style="position:absolute;top:50%;left:50%;width:62%;transform:translate(-50%,-50%);opacity:.12;animation:mjbSpin 60s linear infinite;">
+        </sc-if>
+        <div style="position:absolute;left:26px;top:28px;display:inline-flex;align-items:center;gap:9px;padding:9px 15px;border-radius:14px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(8px);font:600 13px var(--font-body);color:#fff;animation:mjbFloat 7s ease-in-out infinite;">Prompts &amp; cas réels</div>
+        <div style="position:absolute;right:26px;top:118px;display:inline-flex;align-items:center;gap:9px;padding:9px 15px;border-radius:14px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(8px);font:600 13px var(--font-body);color:#fff;animation:mjbFloat 8s ease-in-out .8s infinite;">Automatisation</div>
+        <div style="position:absolute;left:40px;bottom:32px;display:inline-flex;align-items:center;gap:9px;padding:9px 15px;border-radius:14px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(8px);font:600 13px var(--font-body);color:#fff;animation:mjbFloat 7.5s ease-in-out .4s infinite;">Votre assistant IA</div>
+      </div>
+    </div>
+  </section>
+  </sc-if>
+
+  <!-- ============ HERO — VARIANT 3 : PLEIN CADRE ============ -->
+  <sc-if value="{{ isV3 }}" hint-placeholder-val="{{ true }}">
+  <section data-screen-label="Hero" style="position:relative;overflow:hidden;min-height:clamp(560px,82vh,820px);display:flex;align-items:flex-end;background:var(--color-gris-50);">
+    <sc-if value="{{ motion }}" hint-placeholder-val="{{ true }}">
+    <div aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;z-index:0;">
+      <div style="position:absolute;top:-6%;right:6%;width:640px;height:640px;border-radius:50%;filter:blur(96px);opacity:.4;background:radial-gradient(circle at 40% 40%, #507b8c, transparent 68%);animation:mjbDrift1 20s var(--ease-standard) infinite;"></div>
+      <div style="position:absolute;top:18%;left:-8%;width:560px;height:560px;border-radius:50%;filter:blur(96px);opacity:.32;background:radial-gradient(circle at 50% 50%, #416573, transparent 68%);animation:mjbDrift2 24s var(--ease-standard) infinite;"></div>
+      <div style="position:absolute;bottom:-22%;right:28%;width:520px;height:520px;border-radius:50%;filter:blur(90px);opacity:.24;background:radial-gradient(circle at 50% 50%, #194759, transparent 70%);animation:mjbDrift3 28s var(--ease-standard) infinite;"></div>
+    </div>
+    </sc-if>
+    <div style="position:relative;z-index:1;width:100%;max-width:1180px;margin:0 auto;padding:0 clamp(20px,6vw,64px) clamp(64px,9vw,104px);">
+      <div style="display:inline-flex;align-items:center;gap:10px;font:700 12px var(--font-body);letter-spacing:.14em;text-transform:uppercase;color:var(--color-bleu-acier);margin-bottom:26px;">
+        <span style="width:6px;height:6px;border-radius:50%;background:var(--accent);"></span>Formation intelligence artificielle
+      </div>
+      <h1 style="font-family:var(--font-display);font-weight:600;font-size:clamp(40px,7vw,82px);line-height:1.04;letter-spacing:-.03em;color:var(--text-strong);margin:0;max-width:16ch;text-wrap:balance;">
+        L'IA n'est plus une option. Apprenez à l'utiliser <span style="border-bottom:4px solid var(--accent);padding-bottom:4px;white-space:nowrap;">en 3 jours</span>.
+      </h1>
+      <p style="font:400 clamp(16px,1.8vw,19px)/1.65 var(--font-body);color:var(--text-body);max-width:56ch;margin:28px 0 0;text-wrap:pretty;">
+        J'accompagne les dirigeants, salariés, indépendants et organismes de formation à intégrer concrètement l'IA dans leur activité grâce à une formation intensive, pratique et certifiante.
+      </p>
+      <div style="display:flex;flex-wrap:wrap;gap:14px;margin-top:36px;">
+        <x-import component-from-global-scope="MAJUBAHConsultingDesignSystem_a0b600.Button" variant="primary" size="lg" href="#formation" hint-size="240px,54px">Découvrir la formation</x-import>
+        <x-import component-from-global-scope="MAJUBAHConsultingDesignSystem_a0b600.Button" variant="secondary" size="lg" href="#contact" hint-size="160px,54px">Me contacter</x-import>
+      </div>
+    </div>
+  </section>
+  </sc-if>
+
+  <!-- ============ BANDEAU OUTILS IA (marquee défilant) ============ -->
+  <section data-screen-label="Outils IA" style="position:relative;background:#fff;border-bottom:1px solid var(--border-subtle);padding:clamp(26px,4vw,40px) 0;overflow:hidden;">
+    <p style="text-align:center;font:700 12px var(--font-body);letter-spacing:.14em;text-transform:uppercase;color:var(--text-muted);margin:0 0 20px;">Les outils IA que vous maîtriserez</p>
+    <div style="position:relative;width:100%;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);">
+      <div style="display:flex;width:max-content;gap:14px;padding:0 7px;animation:mjbMarquee 30s linear infinite;">
+        <!-- Série 1 -->
+        <span style="display:inline-flex;align-items:center;gap:9px;flex:none;padding:11px 20px;border:1px solid var(--border-subtle);border-radius:999px;background:var(--color-gris-50);font:600 15px var(--font-body);color:var(--text-strong);white-space:nowrap;"><span style="width:7px;height:7px;border-radius:50%;background:var(--accent);"></span>ChatGPT</span>
+        <span style="display:inline-flex;align-items:center;gap:9px;flex:none;padding:11px 20px;border:1px solid var(--border-subtle);border-radius:999px;background:var(--color-gris-50);font:600 15px var(--font-body);color:var(--text-strong);white-space:nowrap;"><span style="width:7px;height:7px;border-radius:50%;background:var(--accent);"></span>Claude</span>
+        <span style="display:inline-flex;align-items:center;gap:9px;flex:none;padding:11px 20px;border:1px solid var(--border-subtle);border-radius:999px;background:var(--color-gris-50);font:600 15px var(--font-body);color:var(--text-strong);white-space:nowrap;"><span style="width:7px;height:7px;border-radius:50%;background:var(--accent);"></span>Gemini</span>
+        <span style="display:inline-flex;align-items:center;gap:9px;flex:none;padding:11px 20px;border:1px solid var(--border-subtle);border-radius:999px;background:var(--color-gris-50);font:600 15px var(--font-body);color:var(--text-strong);white-space:nowrap;"><span style="width:7px;height:7px;border-radius:50%;background:var(--accent);"></span>Grok</span>
+        <span style="display:inline-flex;align-items:center;gap:9px;flex:none;padding:11px 20px;border:1px solid var(--border-subtle);border-radius:999px;background:var(--color-gris-50);font:600 15px var(--font-body);color:var(--text-strong);white-space:nowrap;"><span style="width:7px;height:7px;border-radius:50%;background:var(--accent);"></span>Lovable</span>
+        <span style="display:inline-flex;align-items:center;gap:9px;flex:none;padding:11px 20px;border:1px solid var(--border-subtle);border-radius:999px;background:var(--color-gris-50);font:600 15px var(--font-body);color:var(--text-strong);white-space:nowrap;"><span style="width:7px;height:7px;border-radius:50%;background:var(--accent);"></span>Gamma</span>
+        <span style="display:inline-flex;align-items:center;gap:9px;flex:none;padding:11px 20px;border:1px solid var(--border-subtle);border-radius:999px;background:var(--color-gris-50);font:600 15px var(--font-body);color:var(--text-strong);white-space:nowrap;"><span style="width:7px;height:7px;border-radius:50%;background:var(--accent);"></span>Perplexity</span>
+        <span style="display:inline-flex;align-items:center;gap:9px;flex:none;padding:11px 20px;border:1px solid var(--border-subtle);border-radius:999px;background:var(--color-gris-50);font:600 15px var(--font-body);color:var(--text-strong);white-space:nowrap;"><span style="width:7px;height:7px;border-radius:50%;background:var(--accent);"></span>Copilot</span>
+        <!-- Série 2 (copie pour boucle continue) -->
+        <span style="display:inline-flex;align-items:center;gap:9px;flex:none;padding:11px 20px;border:1px solid var(--border-subtle);border-radius:999px;background:var(--color-gris-50);font:600 15px var(--font-body);color:var(--text-strong);white-space:nowrap;"><span style="width:7px;height:7px;border-radius:50%;background:var(--accent);"></span>ChatGPT</span>
+        <span style="display:inline-flex;align-items:center;gap:9px;flex:none;padding:11px 20px;border:1px solid var(--border-subtle);border-radius:999px;background:var(--color-gris-50);font:600 15px var(--font-body);color:var(--text-strong);white-space:nowrap;"><span style="width:7px;height:7px;border-radius:50%;background:var(--accent);"></span>Claude</span>
+        <span style="display:inline-flex;align-items:center;gap:9px;flex:none;padding:11px 20px;border:1px solid var(--border-subtle);border-radius:999px;background:var(--color-gris-50);font:600 15px var(--font-body);color:var(--text-strong);white-space:nowrap;"><span style="width:7px;height:7px;border-radius:50%;background:var(--accent);"></span>Gemini</span>
+        <span style="display:inline-flex;align-items:center;gap:9px;flex:none;padding:11px 20px;border:1px solid var(--border-subtle);border-radius:999px;background:var(--color-gris-50);font:600 15px var(--font-body);color:var(--text-strong);white-space:nowrap;"><span style="width:7px;height:7px;border-radius:50%;background:var(--accent);"></span>Grok</span>
+        <span style="display:inline-flex;align-items:center;gap:9px;flex:none;padding:11px 20px;border:1px solid var(--border-subtle);border-radius:999px;background:var(--color-gris-50);font:600 15px var(--font-body);color:var(--text-strong);white-space:nowrap;"><span style="width:7px;height:7px;border-radius:50%;background:var(--accent);"></span>Lovable</span>
+        <span style="display:inline-flex;align-items:center;gap:9px;flex:none;padding:11px 20px;border:1px solid var(--border-subtle);border-radius:999px;background:var(--color-gris-50);font:600 15px var(--font-body);color:var(--text-strong);white-space:nowrap;"><span style="width:7px;height:7px;border-radius:50%;background:var(--accent);"></span>Gamma</span>
+        <span style="display:inline-flex;align-items:center;gap:9px;flex:none;padding:11px 20px;border:1px solid var(--border-subtle);border-radius:999px;background:var(--color-gris-50);font:600 15px var(--font-body);color:var(--text-strong);white-space:nowrap;"><span style="width:7px;height:7px;border-radius:50%;background:var(--accent);"></span>Perplexity</span>
+        <span style="display:inline-flex;align-items:center;gap:9px;flex:none;padding:11px 20px;border:1px solid var(--border-subtle);border-radius:999px;background:var(--color-gris-50);font:600 15px var(--font-body);color:var(--text-strong);white-space:nowrap;"><span style="width:7px;height:7px;border-radius:50%;background:var(--accent);"></span>Copilot</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ COMPTEURS (chiffres animés au scroll) — AJUSTEZ les valeurs ============ -->
+  <section data-screen-label="Chiffres" style="background:var(--color-gris-50);border-bottom:1px solid var(--border-subtle);padding:clamp(44px,6vw,76px) 0;">
+    <div style="max-width:1080px;margin:0 auto;padding:0 clamp(20px,6vw,64px);display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:clamp(28px,4vw,48px);text-align:center;">
+      <div>
+        <div id="mjbStat1" data-target="200" data-suffix="+" style="font-family:var(--font-display);font-weight:700;font-size:clamp(40px,6vw,64px);line-height:1;color:var(--color-bleu-nuit);">0</div>
+        <div style="font:600 14px var(--font-body);color:var(--text-body);margin-top:10px;">professionnels accompagnés</div>
+      </div>
+      <div>
+        <div id="mjbStat2" data-target="98" data-suffix="%" style="font-family:var(--font-display);font-weight:700;font-size:clamp(40px,6vw,64px);line-height:1;color:var(--color-bleu-nuit);">0</div>
+        <div style="font:600 14px var(--font-body);color:var(--text-body);margin-top:10px;">recommandent la formation</div>
+      </div>
+      <div>
+        <div id="mjbStat3" data-target="3" data-suffix=" jours" style="font-family:var(--font-display);font-weight:700;font-size:clamp(40px,6vw,64px);line-height:1;color:var(--color-bleu-nuit);">0</div>
+        <div style="font:600 14px var(--font-body);color:var(--text-body);margin-top:10px;">pour devenir autonome</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 1 — QUI SUIS-JE ============ -->
+  <section id="formateur" data-screen-label="Le formateur" style="scroll-margin-top:80px;padding:clamp(80px,12vw,128px) 0;">
+    <div style="width:100%;max-width:1180px;margin:0 auto;padding:0 clamp(20px,6vw,64px);display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(40px,6vw,80px);align-items:center;">
+      <div style="position:relative;">
+        <div aria-hidden="true" style="position:absolute;inset:-6% -6% -6% -6%;border-radius:32px;background:radial-gradient(120% 100% at 70% 20%, rgba(80,123,140,.22), transparent 60%);filter:blur(8px);"></div>
+        <div style="position:relative;border-radius:22px;overflow:hidden;box-shadow:var(--shadow-lg);border:1px solid var(--border-subtle);">
+          <img src="assets/baudry.png" alt="Baudry Bahuna, fondateur de MAJUBAH Consulting" style="display:block;width:100%;height:auto;">
+        </div>
+        <div style="position:absolute;left:18px;bottom:18px;display:flex;flex-direction:column;gap:1px;padding:12px 18px;border-radius:14px;background:rgba(255,255,255,.9);backdrop-filter:blur(8px);box-shadow:var(--shadow-md);">
+          <span style="font:700 15px var(--font-display);color:var(--text-strong);">Baudry Bahuna</span>
+          <span style="font:600 12px var(--font-body);letter-spacing:.04em;color:var(--text-muted);">Fondateur · MAJUBAH Consulting</span>
+        </div>
+      </div>
+      <div>
+        <div style="font:700 12px var(--font-body);letter-spacing:.14em;text-transform:uppercase;color:var(--color-bleu-acier);margin-bottom:18px;">Le formateur</div>
+        <h2 style="font-family:var(--font-display);font-weight:600;font-size:clamp(28px,4vw,44px);line-height:1.12;letter-spacing:-.02em;color:var(--text-strong);margin:0 0 24px;">Qui suis-je ?</h2>
+        <div style="display:flex;flex-direction:column;gap:18px;font:400 clamp(15px,1.4vw,17px)/1.72 var(--font-body);color:var(--text-body);max-width:54ch;text-wrap:pretty;">
+          <p style="margin:0;">Je suis <strong style="color:var(--text-strong);font-weight:700;">Baudry Bahuna</strong>, fondateur de MAJUBAH Consulting et formateur spécialisé en intelligence artificielle.</p>
+          <p style="margin:0;">Depuis plusieurs années, j'accompagne des entreprises, des écoles, des collectivités et des organismes de formation dans l'adoption concrète de l'IA.</p>
+          <p style="margin:0;">Mon objectif est simple : rendre l'intelligence artificielle accessible, utile et immédiatement applicable dans votre quotidien professionnel.</p>
+          <p style="margin:0;">Ma pédagogie repose sur la pratique, des cas réels et une veille permanente des meilleurs outils du marché.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 2 — FORMATION IA ============ -->
+  <section id="formation" data-screen-label="La formation" class="mjb-scroll-section" style="scroll-margin-top:80px;padding:clamp(80px,12vw,128px) 0;background:var(--color-gris-50);border-top:1px solid var(--border-subtle);border-bottom:1px solid var(--border-subtle);">
+    <div style="width:100%;max-width:1180px;margin:0 auto;padding:0 clamp(20px,6vw,64px);perspective:1200px;">
+      <div id="mjbTitle" style="text-align:center;max-width:680px;margin:0 auto 56px;will-change:transform;">
+        <div style="font:700 12px var(--font-body);letter-spacing:.14em;text-transform:uppercase;color:var(--color-bleu-acier);margin-bottom:18px;">La formation</div>
+        <h2 style="font-family:var(--font-display);font-weight:600;font-size:clamp(28px,4vw,44px);line-height:1.12;letter-spacing:-.02em;color:var(--text-strong);margin:0 0 16px;text-wrap:balance;">Formation intensive IA — 3 jours</h2>
+        <p style="font:400 clamp(16px,1.6vw,19px)/1.6 var(--font-body);color:var(--text-body);margin:0;">Passez de débutant à utilisateur autonome de l'intelligence artificielle.</p>
+      </div>
+
+      <!-- Tablette 3D : se redresse au scroll, INTÉRIEUR BLANC contenant les 3 jours -->
+      <div id="mjbCard" style="position:relative;margin:0 auto;border:4px solid #2a4a57;border-radius:30px;background:#0c2530;padding:clamp(10px,1.4vw,18px);box-shadow:0 0 #0000004d,0 9px 20px #0000004a,0 37px 37px #00000042,0 84px 50px #00000026,0 149px 60px #0000000a,0 233px 65px #00000003;transform:rotateX(20deg) scale(1.05);will-change:transform;">
+      <div style="border-radius:18px;background:#fff;padding:clamp(24px,3.5vw,48px);">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;">
+        <div style="position:relative;background:#fff;border:1px solid var(--border-subtle);border-radius:16px;padding:32px 28px;box-shadow:var(--shadow-sm);overflow:hidden;">
+          <span aria-hidden="true" style="position:absolute;top:-18px;right:6px;font-family:var(--font-display);font-weight:700;font-size:110px;line-height:1;color:var(--color-gris-100);">1</span>
+          <div style="position:relative;">
+            <div style="font:700 12px var(--font-body);letter-spacing:.12em;text-transform:uppercase;color:var(--color-bleu-acier);margin-bottom:6px;">Jour 1</div>
+            <h3 style="font-family:var(--font-display);font-weight:600;font-size:21px;color:var(--text-strong);margin:0 0 18px;">Les fondamentaux</h3>
+            <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px;">
+              <li style="display:flex;gap:11px;font:400 15px/1.5 var(--font-body);color:var(--text-body);"><span style="flex:none;width:5px;height:5px;border-radius:50%;background:var(--color-bleu-acier);margin-top:8px;"></span>Découvrir les fondamentaux de l'IA</li>
+              <li style="display:flex;gap:11px;font:400 15px/1.5 var(--font-body);color:var(--text-body);"><span style="flex:none;width:5px;height:5px;border-radius:50%;background:var(--color-bleu-acier);margin-top:8px;"></span>Comprendre les différents outils</li>
+              <li style="display:flex;gap:11px;font:400 15px/1.5 var(--font-body);color:var(--text-body);"><span style="flex:none;width:5px;height:5px;border-radius:50%;background:var(--color-bleu-acier);margin-top:8px;"></span>Construire de bons prompts</li>
+            </ul>
+          </div>
+        </div>
+
+        <div style="position:relative;background:#fff;border:1px solid var(--border-subtle);border-radius:16px;padding:32px 28px;box-shadow:var(--shadow-sm);overflow:hidden;">
+          <span aria-hidden="true" style="position:absolute;top:-18px;right:6px;font-family:var(--font-display);font-weight:700;font-size:110px;line-height:1;color:var(--color-gris-100);">2</span>
+          <div style="position:relative;">
+            <div style="font:700 12px var(--font-body);letter-spacing:.12em;text-transform:uppercase;color:var(--color-bleu-acier);margin-bottom:6px;">Jour 2</div>
+            <h3 style="font-family:var(--font-display);font-weight:600;font-size:21px;color:var(--text-strong);margin:0 0 18px;">Automatiser &amp; produire</h3>
+            <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px;">
+              <li style="display:flex;gap:11px;font:400 15px/1.5 var(--font-body);color:var(--text-body);"><span style="flex:none;width:5px;height:5px;border-radius:50%;background:var(--color-bleu-acier);margin-top:8px;"></span>Automatiser son travail</li>
+              <li style="display:flex;gap:11px;font:400 15px/1.5 var(--font-body);color:var(--text-body);"><span style="flex:none;width:5px;height:5px;border-radius:50%;background:var(--color-bleu-acier);margin-top:8px;"></span>Créer du contenu</li>
+              <li style="display:flex;gap:11px;font:400 15px/1.5 var(--font-body);color:var(--text-body);"><span style="flex:none;width:5px;height:5px;border-radius:50%;background:var(--color-bleu-acier);margin-top:8px;"></span>Produire des documents</li>
+              <li style="display:flex;gap:11px;font:400 15px/1.5 var(--font-body);color:var(--text-body);"><span style="flex:none;width:5px;height:5px;border-radius:50%;background:var(--color-bleu-acier);margin-top:8px;"></span>Gagner du temps</li>
+            </ul>
+          </div>
+        </div>
+
+        <div style="position:relative;background:#fff;border:1px solid var(--border-subtle);border-radius:16px;padding:32px 28px;box-shadow:var(--shadow-sm);overflow:hidden;">
+          <span aria-hidden="true" style="position:absolute;top:-18px;right:6px;font-family:var(--font-display);font-weight:700;font-size:110px;line-height:1;color:var(--color-gris-100);">3</span>
+          <div style="position:relative;">
+            <div style="font:700 12px var(--font-body);letter-spacing:.12em;text-transform:uppercase;color:var(--color-bleu-acier);margin-bottom:6px;">Jour 3</div>
+            <h3 style="font-family:var(--font-display);font-weight:600;font-size:21px;color:var(--text-strong);margin:0 0 18px;">Autonomie &amp; certification</h3>
+            <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px;">
+              <li style="display:flex;gap:11px;font:400 15px/1.5 var(--font-body);color:var(--text-body);"><span style="flex:none;width:5px;height:5px;border-radius:50%;background:var(--color-bleu-acier);margin-top:8px;"></span>Construire son propre assistant IA</li>
+              <li style="display:flex;gap:11px;font:400 15px/1.5 var(--font-body);color:var(--text-body);"><span style="flex:none;width:5px;height:5px;border-radius:50%;background:var(--color-bleu-acier);margin-top:8px;"></span>Créer ses méthodes de travail</li>
+              <li style="display:flex;gap:11px;font:400 15px/1.5 var(--font-body);color:var(--text-body);"><span style="flex:none;width:5px;height:5px;border-radius:50%;background:var(--color-bleu-acier);margin-top:8px;"></span>Passer la certification</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      </div>
+      </div>
+
+      <!-- Encadré navy -->
+      <div style="position:relative;overflow:hidden;margin-top:40px;border-radius:20px;background:linear-gradient(150deg,#194759,#0c2530);box-shadow:var(--shadow-lg);padding:clamp(28px,4vw,44px);">
+        <div aria-hidden="true" style="position:absolute;right:-40px;bottom:-60px;width:240px;height:240px;background:url('assets/logo/sigle-white.png') center/contain no-repeat;opacity:.08;"></div>
+        <div style="position:relative;display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:28px;">
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <span style="display:inline-flex;width:40px;height:40px;align-items:center;justify-content:center;border-radius:11px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);color:#fff;">
+              <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M8 12l2.5 2.5L16 9"></path></svg>
+            </span>
+            <span style="font:700 15px var(--font-display);color:#fff;">Formation éligible CPF</span>
+            <span style="font:400 13px/1.5 var(--font-body);color:rgba(255,255,255,.66);">Financement mobilisable.</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <span style="display:inline-flex;width:40px;height:40px;align-items:center;justify-content:center;border-radius:11px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);color:#fff;">
+              <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="5"></circle><path d="M9 13.5L7.5 21l4.5-2.6L16.5 21 15 13.5"></path></svg>
+            </span>
+            <span style="font:700 15px var(--font-display);color:#fff;">Certification</span>
+            <span style="font:400 13px/1.5 var(--font-body);color:rgba(255,255,255,.66);">Webmarketing &amp; Intelligence Artificielle.</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <span style="display:inline-flex;width:40px;height:40px;align-items:center;justify-content:center;border-radius:11px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);color:#fff;">
+              <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="16.5" rx="2.2"></rect><path d="M3 9.5h18M8 2.5v4M16 2.5v4"></path></svg>
+            </span>
+            <span style="font:700 15px var(--font-display);color:#fff;">3 jours intensifs</span>
+            <span style="font:400 13px/1.5 var(--font-body);color:rgba(255,255,255,.66);">Un format court et opérationnel.</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <span style="display:inline-flex;width:40px;height:40px;align-items:center;justify-content:center;border-radius:11px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);color:#fff;">
+              <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="12" rx="2"></rect><path d="M8 20.5h8M12 16.5v4"></path></svg>
+            </span>
+            <span style="font:700 15px var(--font-display);color:#fff;">Présentiel ou distanciel</span>
+            <span style="font:400 13px/1.5 var(--font-body);color:rgba(255,255,255,.66);">Selon votre organisation.</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="text-align:center;margin-top:44px;">
+        <x-import component-from-global-scope="MAJUBAHConsultingDesignSystem_a0b600.Button" variant="primary" size="lg" href="#contact" hint-size="280px,56px">Je souhaite être contacté</x-import>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DÉMO IA EN DIRECT ============ -->
+  <section data-screen-label="Démo IA" style="background:#fff;padding:clamp(72px,11vw,120px) 0;border-bottom:1px solid var(--border-subtle);">
+    <div style="max-width:880px;margin:0 auto;padding:0 clamp(20px,6vw,64px);text-align:center;">
+      <div style="display:inline-flex;align-items:center;gap:9px;padding:7px 16px;border:1px solid var(--border-subtle);border-radius:999px;background:var(--color-gris-50);font:700 12px var(--font-body);letter-spacing:.14em;text-transform:uppercase;color:var(--color-bleu-acier);margin-bottom:20px;">
+        <span style="width:7px;height:7px;border-radius:50%;background:var(--accent);animation:mjbBlink 1.4s step-end infinite;"></span>Démo en direct
+      </div>
+      <h2 style="font-family:var(--font-display);font-weight:600;font-size:clamp(28px,4vw,44px);line-height:1.12;letter-spacing:-.02em;color:var(--text-strong);margin:0 0 14px;text-wrap:balance;">Posez une question à l'IA, maintenant</h2>
+      <p style="font:400 clamp(15px,1.5vw,18px)/1.6 var(--font-body);color:var(--text-body);margin:0 auto 28px;max-width:52ch;">Tapez votre question (ou choisissez un exemple) et regardez la réponse se générer en direct.</p>
+
+      <!-- Exemples cliquables -->
+      <div id="mjbAiExamples" style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:24px;">
+        <button data-q="Comment l'IA peut me faire gagner du temps ?" style="cursor:pointer;font:600 13px var(--font-body);color:var(--text-body);background:var(--color-gris-50);border:1px solid var(--border-subtle);border-radius:999px;padding:9px 16px;">Gagner du temps&nbsp;?</button>
+        <button data-q="C'est quoi un bon prompt ?" style="cursor:pointer;font:600 13px var(--font-body);color:var(--text-body);background:var(--color-gris-50);border:1px solid var(--border-subtle);border-radius:999px;padding:9px 16px;">C'est quoi un bon prompt&nbsp;?</button>
+        <button data-q="Écris-moi un email de prospection" style="cursor:pointer;font:600 13px var(--font-body);color:var(--text-body);background:var(--color-gris-50);border:1px solid var(--border-subtle);border-radius:999px;padding:9px 16px;">Écrire un email de prospection</button>
+        <button data-q="Je suis débutant, est-ce pour moi ?" style="cursor:pointer;font:600 13px var(--font-body);color:var(--text-body);background:var(--color-gris-50);border:1px solid var(--border-subtle);border-radius:999px;padding:9px 16px;">Je suis débutant</button>
+      </div>
+
+      <!-- Carte chat -->
+      <div style="text-align:left;background:#fff;border:1px solid var(--border-default);border-radius:18px;box-shadow:var(--shadow-md);padding:clamp(20px,3vw,32px);">
+        <div id="mjbAiOutput" style="min-height:120px;margin-bottom:18px;">
+          <p style="font:400 16px/1.6 var(--font-body);color:var(--text-muted);margin:0;">La réponse de l'assistant IA s'affichera ici…</p>
+        </div>
+        <form id="mjbAiForm" style="display:flex;gap:12px;align-items:center;border-top:1px solid var(--border-subtle);padding-top:18px;">
+          <input id="mjbAiInput" type="text" autocomplete="off" placeholder="Écrivez votre question…" style="flex:1 1 auto;font:400 15px var(--font-body);color:var(--text-strong);background:#fff;border:1px solid var(--border-default);border-radius:12px;padding:13px 16px;transition:border-color .2s,box-shadow .2s;" style-focus="outline:none;border-color:var(--primary);box-shadow:0 0 0 3px var(--focus-ring);">
+          <x-import component-from-global-scope="MAJUBAHConsultingDesignSystem_a0b600.Button" variant="primary" size="md" type="submit" hint-size="120px,48px">Envoyer</x-import>
+        </form>
+      </div>
+      <p style="font:400 12px var(--font-body);color:var(--text-muted);margin:16px 0 0;">Démo illustrative. La vraie formation va beaucoup plus loin.</p>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 3 — CONTACT ============ -->
+  <section id="contact" data-screen-label="Contact" style="scroll-margin-top:80px;padding:clamp(80px,12vw,128px) 0;">
+    <div style="width:100%;max-width:1180px;margin:0 auto;padding:0 clamp(20px,6vw,64px);display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:clamp(40px,6vw,72px);align-items:start;">
+      <div>
+        <div style="font:700 12px var(--font-body);letter-spacing:.14em;text-transform:uppercase;color:var(--color-bleu-acier);margin-bottom:18px;">Contact</div>
+        <h2 style="font-family:var(--font-display);font-weight:600;font-size:clamp(28px,4vw,44px);line-height:1.12;letter-spacing:-.02em;color:var(--text-strong);margin:0 0 18px;">Parlons de votre projet</h2>
+        <p style="font:400 clamp(15px,1.4vw,17px)/1.7 var(--font-body);color:var(--text-body);max-width:42ch;margin:0 0 32px;text-wrap:pretty;">
+          Vous souhaitez former vos équipes ou participer à une prochaine session ? Remplissez le formulaire et je vous recontacte rapidement.
+        </p>
+        <div style="display:flex;flex-direction:column;gap:6px;padding-top:28px;border-top:1px solid var(--border-subtle);">
+          <span style="font:700 16px var(--font-display);color:var(--text-strong);">MAJUBAH Consulting</span>
+          <span style="font:400 15px var(--font-body);color:var(--text-body);">Baudry Bahuna · Normandie</span>
+          <a href="mailto:baudry@majubah.com" style="font:600 15px var(--font-body);color:var(--color-bleu-nuit);text-decoration:none;margin-top:6px;" style-hover="text-decoration:underline;text-underline-offset:3px;">baudry@majubah.com</a>
+          <a href="#" style="font:600 15px var(--font-body);color:var(--color-bleu-nuit);text-decoration:none;" style-hover="text-decoration:underline;text-underline-offset:3px;">LinkedIn — Baudry Bahuna</a>
+        </div>
+      </div>
+
+      <div style="background:#fff;border:1px solid var(--border-subtle);border-radius:18px;box-shadow:var(--shadow-md);padding:clamp(24px,3vw,36px);">
+        <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
+        <form onSubmit="{{ onSubmit }}" style="display:flex;flex-direction:column;gap:18px;">
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:18px;">
+            <label style="display:flex;flex-direction:column;gap:7px;">
+              <span style="font:700 13px var(--font-body);color:var(--text-strong);">Nom</span>
+              <input value="{{ nom }}" onChange="{{ onNom }}" placeholder="Votre nom" style="width:100%;font:400 15px var(--font-body);color:var(--text-strong);background:#fff;border:1px solid var(--border-default);border-radius:10px;padding:12px 14px;transition:border-color .2s,box-shadow .2s;" style-focus="outline:none;border-color:var(--primary);box-shadow:0 0 0 3px var(--focus-ring);">
+            </label>
+            <label style="display:flex;flex-direction:column;gap:7px;">
+              <span style="font:700 13px var(--font-body);color:var(--text-strong);">Entreprise</span>
+              <input value="{{ entreprise }}" onChange="{{ onEntreprise }}" placeholder="Votre entreprise" style="width:100%;font:400 15px var(--font-body);color:var(--text-strong);background:#fff;border:1px solid var(--border-default);border-radius:10px;padding:12px 14px;transition:border-color .2s,box-shadow .2s;" style-focus="outline:none;border-color:var(--primary);box-shadow:0 0 0 3px var(--focus-ring);">
+            </label>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:18px;">
+            <label style="display:flex;flex-direction:column;gap:7px;">
+              <span style="font:700 13px var(--font-body);color:var(--text-strong);">Email</span>
+              <input type="email" value="{{ email }}" onChange="{{ onEmail }}" placeholder="vous@entreprise.fr" style="width:100%;font:400 15px var(--font-body);color:var(--text-strong);background:#fff;border:1px solid var(--border-default);border-radius:10px;padding:12px 14px;transition:border-color .2s,box-shadow .2s;" style-focus="outline:none;border-color:var(--primary);box-shadow:0 0 0 3px var(--focus-ring);">
+            </label>
+            <label style="display:flex;flex-direction:column;gap:7px;">
+              <span style="font:700 13px var(--font-body);color:var(--text-strong);">Téléphone</span>
+              <input type="tel" value="{{ tel }}" onChange="{{ onTel }}" placeholder="06 12 34 56 78" style="width:100%;font:400 15px var(--font-body);color:var(--text-strong);background:#fff;border:1px solid var(--border-default);border-radius:10px;padding:12px 14px;transition:border-color .2s,box-shadow .2s;" style-focus="outline:none;border-color:var(--primary);box-shadow:0 0 0 3px var(--focus-ring);">
+            </label>
+          </div>
+          <label style="display:flex;flex-direction:column;gap:7px;">
+            <span style="font:700 13px var(--font-body);color:var(--text-strong);">Message</span>
+            <textarea value="{{ message }}" onChange="{{ onMessage }}" rows="4" placeholder="Décrivez votre besoin en quelques mots…" style="width:100%;font:400 15px/1.55 var(--font-body);color:var(--text-strong);background:#fff;border:1px solid var(--border-default);border-radius:10px;padding:12px 14px;resize:vertical;transition:border-color .2s,box-shadow .2s;" style-focus="outline:none;border-color:var(--primary);box-shadow:0 0 0 3px var(--focus-ring);"></textarea>
+          </label>
+          <div style="margin-top:4px;">
+            <x-import component-from-global-scope="MAJUBAHConsultingDesignSystem_a0b600.Button" variant="primary" size="lg" type="submit" full-width="{{ true }}" hint-size="100%,54px">Envoyer ma demande</x-import>
+          </div>
+        </form>
+        </sc-if>
+        <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;flex-direction:column;align-items:center;text-align:center;padding:28px 12px;gap:16px;">
+          <span style="display:inline-flex;width:56px;height:56px;align-items:center;justify-content:center;border-radius:50%;background:var(--color-bleu-nuit);color:#fff;">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"></path></svg>
+          </span>
+          <h3 style="font-family:var(--font-display);font-weight:600;font-size:22px;color:var(--text-strong);margin:0;">Demande envoyée</h3>
+          <p style="font:400 15px/1.6 var(--font-body);color:var(--text-muted);margin:0;max-width:34ch;">Merci. Je vous recontacte rapidement pour échanger sur votre projet.</p>
+          <button onClick="{{ onReset }}" style="margin-top:4px;font:700 14px var(--font-body);color:var(--color-bleu-nuit);background:none;border:none;cursor:pointer;letter-spacing:.02em;" style-hover="text-decoration:underline;text-underline-offset:3px;">Envoyer une nouvelle demande</button>
+        </div>
+        </sc-if>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 4 — NEWSLETTER ============ -->
+  <section data-screen-label="Newsletter" style="position:relative;overflow:hidden;background:linear-gradient(158deg,#194759,#0c2530);padding:clamp(72px,10vw,112px) 0;">
+    <div aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;">
+      <div style="position:absolute;top:-22%;left:6%;width:420px;height:420px;border-radius:50%;filter:blur(80px);opacity:.4;background:radial-gradient(circle,#507b8c,transparent 70%);animation:mjbDrift1 18s var(--ease-standard) infinite;"></div>
+      <div style="position:absolute;bottom:-26%;right:4%;width:460px;height:460px;border-radius:50%;filter:blur(86px);opacity:.32;background:radial-gradient(circle,#416573,transparent 70%);animation:mjbDrift2 22s var(--ease-standard) infinite;"></div>
+    </div>
+    <div style="position:relative;z-index:1;width:100%;max-width:760px;margin:0 auto;padding:0 clamp(20px,6vw,40px);text-align:center;">
+      <div style="display:inline-flex;align-items:center;gap:10px;padding:7px 16px;border:1px solid rgba(255,255,255,.2);border-radius:999px;background:rgba(255,255,255,.08);font:700 12px var(--font-body);letter-spacing:.14em;text-transform:uppercase;color:#fff;margin-bottom:26px;">
+        <span style="width:6px;height:6px;border-radius:50%;background:var(--accent);"></span>Newsletter IA
+      </div>
+      <h2 style="font-family:var(--font-display);font-weight:600;font-size:clamp(28px,4vw,46px);line-height:1.12;letter-spacing:-.02em;color:#fff;margin:0;text-wrap:balance;">
+        L'actualité de l'IA, décryptée chaque semaine.
+      </h2>
+      <div style="max-width:640px;margin:0 auto;">
+          <p style="font:400 clamp(15px,1.5vw,18px)/1.7 var(--font-body);color:rgba(255,255,255,.82);max-width:54ch;margin:0 auto;text-wrap:pretty;">
+            Outils, cas d'usage concrets et tendances : recevez l'essentiel de l'intelligence artificielle directement dans votre boîte mail. Sans spam, désinscription en un clic.
+          </p>
+
+          <sc-if value="{{ notSubscribed }}" hint-placeholder-val="{{ true }}">
+          <form onSubmit="{{ onSubscribe }}" style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;align-items:center;margin-top:32px;">
+            <input type="email" required="required" value="{{ newsletterEmail }}" onChange="{{ onNewsletterEmail }}" placeholder="vous@entreprise.fr" style="flex:1 1 280px;max-width:360px;font:400 15px var(--font-body);color:var(--text-strong);background:#fff;border:1px solid rgba(255,255,255,.25);border-radius:12px;padding:15px 16px;transition:box-shadow .2s;" style-focus="outline:none;box-shadow:0 0 0 3px rgba(255,255,255,.35);">
+            <x-import component-from-global-scope="MAJUBAHConsultingDesignSystem_a0b600.Button" variant="primary" size="lg" type="submit" hint-size="170px,54px">Je m'inscris</x-import>
+          </form>
+          <p style="font:400 13px var(--font-body);color:rgba(255,255,255,.6);margin:16px 0 0;">Rejoignez les professionnels qui prennent une longueur d'avance sur l'IA.</p>
+          </sc-if>
+
+          <sc-if value="{{ subscribed }}" hint-placeholder-val="{{ false }}">
+          <div style="display:inline-flex;align-items:center;gap:13px;margin-top:32px;padding:16px 24px;border-radius:14px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);">
+            <span style="display:inline-flex;width:34px;height:34px;align-items:center;justify-content:center;border-radius:50%;background:var(--accent);color:#0c2530;flex:none;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"></path></svg>
+            </span>
+            <span style="font:600 15px var(--font-body);color:#fff;text-align:left;">Inscription confirmée. À très vite dans votre boîte mail !</span>
+          </div>
+          </sc-if>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer style="border-top:1px solid var(--border-subtle);background:#fff;padding:40px 0;">
+    <div style="width:100%;max-width:1180px;margin:0 auto;padding:0 clamp(20px,6vw,64px);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px;">
+      <div role="img" aria-label="MAJUBAH Consulting" style="width:97px;height:24px;background:url('assets/logo/majubah-horizontal.png') left center/contain no-repeat;"></div>
+
+      <p style="font:400 13px/1.6 var(--font-body);color:var(--text-muted);margin:0;max-width:62ch;text-align:right;">© MAJUBAH Consulting — Former aujourd'hui les professionnels de demain à l'intelligence artificielle.</p>
+    </div>
+  </footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;heroVariant&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;Centré&quot;,&quot;options&quot;:[&quot;Centré&quot;,&quot;Asymétrique&quot;,&quot;Plein cadre&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Hero&quot;},&quot;ambientMotion&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Hero&quot;}}">
+class Component extends DCLogic {
+  state = { sent: false, nom: '', entreprise: '', email: '', tel: '', message: '', subscribed: false, newsletterEmail: '' };
+
+  field(key) {
+    return (e) => {
+      const v = e.target.value;
+      this.setState({ [key]: v });
+    };
+  }
+
+  renderVals() {
+    const variant = this.props.heroVariant || 'Centré';
+    const motion = this.props.ambientMotion !== false;
+    return {
+      isV1: variant === 'Centré',
+      isV2: variant === 'Asymétrique',
+      isV3: variant === 'Plein cadre',
+      motion,
+      sent: this.state.sent,
+      notSent: !this.state.sent,
+      nom: this.state.nom,
+      entreprise: this.state.entreprise,
+      email: this.state.email,
+      tel: this.state.tel,
+      message: this.state.message,
+      onNom: this.field('nom'),
+      onEntreprise: this.field('entreprise'),
+      onEmail: this.field('email'),
+      onTel: this.field('tel'),
+      onMessage: this.field('message'),
+      onSubmit: (e) => { e.preventDefault(); this.setState({ sent: true }); },
+      onReset: () => this.setState({ sent: false, nom: '', entreprise: '', email: '', tel: '', message: '' }),
+      subscribed: this.state.subscribed,
+      notSubscribed: !this.state.subscribed,
+      newsletterEmail: this.state.newsletterEmail,
+      onNewsletterEmail: this.field('newsletterEmail'),
+      onSubscribe: (e) => { e.preventDefault(); this.setState({ subscribed: true }); },
+    };
+  }
+}
+</script>
+<!-- Anime la section "La formation" au scroll : tablette (intérieur blanc) qui se redresse (rotateX 20°→0, scale 1.05→1) + titre qui remonte. Repro native de ContainerScroll (useScroll/useTransform). -->
+<script>
+(function () {
+  function clamp(v) { return v < 0 ? 0 : v > 1 ? 1 : v; }
+  function init() {
+    // Sélection par id : le dc-runtime conserve les id (pas forcément les class).
+    var card = document.getElementById('mjbCard');
+    var title = document.getElementById('mjbTitle');
+    // Le dc-runtime rend le DOM de façon asynchrone : on réessaie tant que la tablette n'existe pas.
+    if (!card) { return window.setTimeout(init, 200); }
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      card.style.transform = 'none';
+      if (title) title.style.transform = 'none';
+      return;
+    }
+    var ticking = false;
+    function update() {
+      ticking = false;
+      var r = card.getBoundingClientRect();
+      var vh = window.innerHeight || document.documentElement.clientHeight;
+      var start = vh;                        // 0 % : la tablette entre par le bas de l'écran
+      var end = vh * 0.5 - r.height * 0.5;   // 100 % : la tablette est centrée verticalement
+      var p = clamp((start - r.top) / (start - end));
+      card.style.transform = 'rotateX(' + (20 * (1 - p)) + 'deg) scale(' + (1.05 - 0.05 * p) + ')';
+      if (title) title.style.transform = 'translateY(' + (-40 * p) + 'px)';
+    }
+    function onScroll() { if (!ticking) { ticking = true; window.requestAnimationFrame(update); } }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    update();
+  }
+  if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', init); }
+  else { init(); }
+})();
+</script>
+
+<!-- Effet "génération IA" (typewriter) sur le titre du héro -->
+<script>
+(function () {
+  function run() {
+    var el = document.getElementById('mjbHeroTitle');
+    if (!el) { return window.setTimeout(run, 200); }
+    var finalHTML = el.getAttribute('data-final') || el.innerHTML;
+    var tmp = document.createElement('div'); tmp.innerHTML = finalHTML;
+    var plain = (tmp.textContent || '').trim();
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) { el.innerHTML = finalHTML; return; }
+    var caret = '<span style="display:inline-block;width:3px;height:0.82em;background:var(--accent);vertical-align:-0.08em;margin-left:3px;animation:mjbBlink 1s step-end infinite;"></span>';
+    var i = 0;
+    el.textContent = '';
+    (function tick() {
+      i++;
+      el.innerHTML = plain.slice(0, i).replace(/&/g, '&amp;').replace(/</g, '&lt;') + caret;
+      if (i < plain.length) { window.setTimeout(tick, 36); }
+      else { el.innerHTML = finalHTML; }
+    })();
+  }
+  if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', run); }
+  else { run(); }
+})();
+</script>
+
+<!-- Compteurs animés quand la bande entre dans l'écran -->
+<script>
+(function () {
+  function run() {
+    var ids = ['mjbStat1', 'mjbStat2', 'mjbStat3'];
+    var nodes = ids.map(function (id) { return document.getElementById(id); });
+    if (nodes.some(function (n) { return !n; })) { return window.setTimeout(run, 200); }
+    function animate(node) {
+      if (node.dataset.done) return; node.dataset.done = '1';
+      var target = parseFloat(node.getAttribute('data-target')) || 0;
+      var suffix = node.getAttribute('data-suffix') || '';
+      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) { node.textContent = target + suffix; return; }
+      var start = null, dur = 1400;
+      (function step(ts) {
+        if (start === null) start = ts;
+        var p = Math.min((ts - start) / dur, 1);
+        var eased = 1 - Math.pow(1 - p, 3);
+        node.textContent = Math.round(target * eased) + suffix;
+        if (p < 1) window.requestAnimationFrame(step);
+      })(performance.now());
+    }
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { if (e.isIntersecting) animate(e.target); });
+      }, { threshold: 0.4 });
+      nodes.forEach(function (n) { io.observe(n); });
+    } else { nodes.forEach(animate); }
+  }
+  if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', run); }
+  else { run(); }
+})();
+</script>
+
+<!-- Démo IA : réponses pré-écrites en streaming par défaut ; bascule sur l'API Claude si window.MJB_AI_ENDPOINT est défini -->
+<script>
+(function () {
+  var ANSWERS = [
+    { k: ['temps', 'gagner', 'productiv', 'rapide'], a: "L'IA vous fait gagner du temps en automatisant les tâches répétitives : rédaction d'emails, comptes-rendus, résumés de documents, tri d'informations… Une heure de travail administratif peut tomber à quelques minutes. En formation, vous repartez avec VOS propres automatisations prêtes à l'emploi." },
+    { k: ['prompt', 'consigne', 'instruction'], a: "Un bon prompt est clair, contextualisé et précis : donnez un rôle à l'IA (« Tu es un expert en… »), expliquez l'objectif, fournissez le contexte et le format attendu. Plus vous êtes précis, meilleur est le résultat — c'est ce que vous maîtrisez dès le Jour 1." },
+    { k: ['email', 'mail', 'prospection', 'vendre', 'client'], a: "Avec plaisir. Exemple : « Objet : Gagnez du temps grâce à l'IA. Bonjour [Prénom], j'aide les entreprises comme la vôtre à automatiser leurs tâches grâce à l'IA. Auriez-vous 15 minutes cette semaine pour en parler ? » En formation, vous générez ce type de contenu adapté à VOTRE activité en quelques secondes." },
+    { k: ['débutant', 'commencer', 'peur', 'difficile', 'nul', 'pour moi'], a: "Aucun prérequis technique : on part de zéro, 100 % pratique. En 3 jours, vous passez de débutant à utilisateur autonome, avec des cas concrets issus de votre métier. L'objectif n'est pas de coder, mais d'utiliser l'IA efficacement au quotidien." }
+  ];
+  var DEFAULT = "Excellente question ! L'IA permet aujourd'hui d'automatiser, créer et analyser bien plus vite. Dans cette formation de 3 jours, vous apprenez à l'appliquer concrètement à votre métier, sans jargon technique. Pour une réponse personnalisée à votre situation, contactez-moi via le formulaire juste en dessous.";
+  function pick(q) {
+    var s = q.toLowerCase();
+    for (var i = 0; i < ANSWERS.length; i++) { for (var j = 0; j < ANSWERS[i].k.length; j++) { if (s.indexOf(ANSWERS[i].k[j]) >= 0) return ANSWERS[i].a; } }
+    return DEFAULT;
+  }
+  function esc(t) { return t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+  function run() {
+    var form = document.getElementById('mjbAiForm');
+    var input = document.getElementById('mjbAiInput');
+    var out = document.getElementById('mjbAiOutput');
+    var ex = document.getElementById('mjbAiExamples');
+    if (!form || !input || !out) { return window.setTimeout(run, 200); }
+    var busy = false;
+    var caret = '<span style="display:inline-block;width:7px;height:1em;background:var(--accent);vertical-align:-2px;margin-left:2px;animation:mjbBlink 1s step-end infinite;"></span>';
+    function stream(node, text, done) {
+      var i = 0;
+      (function tick() {
+        i += (text.charAt(i) === ' ' ? 1 : 2); if (i > text.length) i = text.length;
+        node.innerHTML = esc(text.slice(0, i)) + caret;
+        if (i < text.length) window.setTimeout(tick, 12);
+        else { node.innerHTML = esc(text); if (done) done(); }
+      })();
+    }
+    function apiStream(q, node, done) {
+      node.textContent = '…';
+      fetch(window.MJB_AI_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ message: q }) })
+        .then(function (r) {
+          if (!r.ok || !r.body) throw new Error('bad');
+          var reader = r.body.getReader(), dec = new TextDecoder(), acc = '';
+          node.textContent = '';
+          (function read() {
+            return reader.read().then(function (res) {
+              if (res.done) { if (done) done(); return; }
+              acc += dec.decode(res.value, { stream: true });
+              node.innerHTML = esc(acc) + caret;
+              return read();
+            });
+          })().then(function () { node.innerHTML = esc(acc); });
+        })
+        .catch(function () { stream(node, pick(q), done); });
+    }
+    function answer(q) {
+      busy = true;
+      out.innerHTML = '';
+      var uq = document.createElement('div');
+      uq.style.cssText = 'font:600 14px var(--font-body);color:var(--color-bleu-acier);margin:0 0 14px;';
+      uq.textContent = 'Vous : ' + q;
+      var lab = document.createElement('div');
+      lab.style.cssText = 'font:700 12px var(--font-body);letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted);margin:0 0 8px;';
+      lab.textContent = 'Assistant IA';
+      var ans = document.createElement('div');
+      ans.style.cssText = 'font:400 16px/1.65 var(--font-body);color:var(--text-strong);';
+      out.appendChild(uq); out.appendChild(lab); out.appendChild(ans);
+      if (window.MJB_AI_ENDPOINT) { apiStream(q, ans, function () { busy = false; }); }
+      else { window.setTimeout(function () { stream(ans, pick(q), function () { busy = false; }); }, 280); }
+    }
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var q = (input.value || '').trim();
+      if (!q || busy) return;
+      answer(q);
+    });
+    if (ex) {
+      ex.addEventListener('click', function (e) {
+        var t = e.target.closest ? e.target.closest('[data-q]') : null;
+        if (!t || busy) return;
+        input.value = t.getAttribute('data-q');
+        answer(input.value);
+      });
+    }
+  }
+  if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', run); }
+  else { run(); }
+})();
+</script>
+</body>
+</html>

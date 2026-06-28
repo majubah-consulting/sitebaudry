@@ -1,0 +1,15 @@
+# macOS
+.DS_Store
+**/.DS_Store
+
+# Secrets — ne JAMAIS committer les vraies clés (.env.example reste suivi)
+.env
+.env.local
+.env.*.local
+
+# Dépendances (si un jour vous ajoutez npm)
+node_modules/
+
+# Pages web enregistrées par erreur (parasites)
+assets/avis/hugoleveziel.html
+assets/avis/hugoleveziel_files/

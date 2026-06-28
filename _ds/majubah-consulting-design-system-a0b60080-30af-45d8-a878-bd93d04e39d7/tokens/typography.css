@@ -1,0 +1,52 @@
+/* MAJUBAH Consulting — Typography tokens
+   Display / titrage: Sora (substitute for proprietary "Nipera").
+   Text / UI:         Lato (official charte accompaniment font).
+   Casing: titles often UPPERCASE with positive tracking, echoing the wordmark. */
+
+:root {
+  /* Families */
+  --font-display: 'Sora', 'Segoe UI', system-ui, sans-serif;   /* headings, titling, stat numbers */
+  --font-body:    'Lato', 'Helvetica Neue', Arial, sans-serif;  /* body, UI, captions */
+  --font-mono:    'IBM Plex Mono', ui-monospace, 'SFMono-Regular', monospace;
+
+  /* Weights */
+  --fw-light:     300; /* @kind other */ /* Lato Light — signature, fine print */
+  --fw-regular:   400; /* @kind other */
+  --fw-medium:    500; /* @kind other */ /* Sora medium */
+  --fw-semibold:  600; /* @kind other */ /* emphasis — noms, numéros */
+  --fw-bold:      700; /* @kind other */
+  --fw-black:     900; /* @kind other */ /* Lato Black — read-from-afar */
+
+  /* Type scale (1.250 major-third-ish, tuned) */
+  --text-2xs:  0.6875rem; /* 11 — eyebrows, legal */
+  --text-xs:   0.75rem;   /* 12 */
+  --text-sm:   0.875rem;  /* 14 */
+  --text-base: 1rem;      /* 16 — body default */
+  --text-md:   1.125rem;  /* 18 — lead body */
+  --text-lg:   1.25rem;   /* 20 */
+  --text-xl:   1.5rem;    /* 24 */
+  --text-2xl:  1.875rem;  /* 30 */
+  --text-3xl:  2.25rem;   /* 36 */
+  --text-4xl:  3rem;      /* 48 */
+  --text-5xl:  3.75rem;   /* 60 */
+  --text-6xl:  4.75rem;   /* 76 — hero */
+
+  /* Line heights */
+  --leading-none:    1;
+  --leading-tight:   1.12;  /* display headings */
+  --leading-snug:    1.28;  /* subheads */
+  --leading-normal:  1.55;  /* body */
+  --leading-relaxed: 1.7;   /* long-form, "très aéré" */
+
+  /* Letter spacing */
+  --tracking-tight:   -0.02em; /* large display */
+  --tracking-normal:  0;
+  --tracking-wide:    0.04em;
+  --tracking-caps:    0.14em;  /* UPPERCASE eyebrows & buttons */
+  --tracking-caps-lg: 0.18em;  /* logo-echo titling */
+
+  /* Semantic roles */
+  --role-eyebrow-size:    var(--text-sm);
+  --role-eyebrow-weight:  var(--fw-bold);
+  --role-eyebrow-spacing: var(--tracking-caps);
+}

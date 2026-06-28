@@ -1,0 +1,91 @@
+/* MAJUBAH Consulting — Color tokens
+   Source: Charte graphique MAJUBAH 2024 (LIV Studio).
+   Logo colours: Bleu nuit #194759 (PMS 7477C) · Corail #eb5436 (PMS 7625C).
+   The logo may only sit on white, bleu, or corail backgrounds. */
+
+:root {
+  /* ---- Brand core ---- */
+  --color-bleu-nuit:      #194759; /* primary — confiance, stratégie, technologie */
+  --color-corail:         #eb5436; /* accent — énergie, rappel identité MAJUBAH */
+
+  /* ---- Couleurs d'accompagnement (charte) ---- */
+  --color-anthracite:     #243840; /* PMS 7546C — élégance, texte profond */
+  --color-bleu-ardoise:   #416573; /* PMS 7699C */
+  --color-bleu-acier:     #507b8c; /* PMS 5415C */
+  --color-corail-vif:     #e83810; /* PMS Bright Red C */
+  --color-corail-clair:   #ff7152; /* PMS 164C */
+  --color-saumon:         #ed907b; /* PMS 1625C */
+
+  /* ---- Tints derived for surfaces & states (harmonised, oklch-balanced) ---- */
+  --color-bleu-nuit-700:  #123747;
+  --color-bleu-nuit-900:  #0c2530;
+  --color-corail-600:     #d8421f; /* hover / press for corail */
+  --color-corail-50:      #fdeee9; /* wash background */
+  --color-bleu-50:        #eef3f5; /* wash background */
+
+  /* ---- Neutrals — cool grey scale tuned to the navy ---- */
+  --color-white:          #ffffff;
+  --color-gris-50:        #f7f9fa;
+  --color-gris-100:       #eef2f4;
+  --color-gris-200:       #e2e8ea;
+  --color-gris-300:       #cdd6da;
+  --color-gris-400:       #a3afb4;
+  --color-gris-500:       #6f8085;
+  --color-gris-600:       #4d5d63;
+  --color-gris-700:       #36464d;
+  --color-noir:           #0e1c22;
+
+  /* ---- Semantic feedback ---- */
+  --color-success:        #2f7d63;
+  --color-success-bg:     #e7f2ed;
+  --color-warning:        #c77a17;
+  --color-warning-bg:     #fbf0df;
+  --color-danger:         #c5341b;
+  --color-danger-bg:      #fbeae6;
+  --color-info:           var(--color-bleu-acier);
+  --color-info-bg:        var(--color-bleu-50);
+
+  /* ============ Semantic aliases ============ */
+  /* Text */
+  --text-strong:   var(--color-bleu-nuit);
+  --text-body:     var(--color-gris-700);
+  --text-muted:    var(--color-gris-500);
+  --text-subtle:   var(--color-gris-400);
+  --text-inverse:  var(--color-white);
+  --text-accent:   var(--color-corail);
+  --text-on-navy:  rgba(255,255,255,0.92);
+  --text-on-navy-muted: rgba(255,255,255,0.64);
+
+  /* Surfaces */
+  --surface-page:    var(--color-white);
+  --surface-muted:   var(--color-gris-50);
+  --surface-sunken:  var(--color-gris-100);
+  --surface-card:    var(--color-white);
+  --surface-navy:    var(--color-bleu-nuit);
+  --surface-navy-deep: var(--color-anthracite);
+  --surface-corail:  var(--color-corail);
+  --surface-corail-wash: var(--color-corail-50);
+  --surface-bleu-wash:   var(--color-bleu-50);
+
+  /* Borders */
+  --border-subtle:  var(--color-gris-200);
+  --border-default: var(--color-gris-300);
+  --border-strong:  var(--color-gris-400);
+  --border-navy:    var(--color-bleu-nuit);
+  --border-on-navy: rgba(255,255,255,0.18);
+
+  /* Interactive — primary (navy) */
+  --primary:        var(--color-bleu-nuit);
+  --primary-hover:  var(--color-bleu-nuit-700);
+  --primary-press:  var(--color-bleu-nuit-900);
+  --on-primary:     var(--color-white);
+
+  /* Interactive — accent (corail) */
+  --accent:         var(--color-corail);
+  --accent-hover:   var(--color-corail-600);
+  --accent-press:   #bd3a18;
+  --on-accent:      var(--color-white);
+
+  /* Focus */
+  --focus-ring:     color-mix(in srgb, var(--color-bleu-acier) 55%, transparent);
+}

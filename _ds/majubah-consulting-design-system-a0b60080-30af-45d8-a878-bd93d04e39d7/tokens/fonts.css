@@ -1,0 +1,8 @@
+/* MAJUBAH Consulting — Webfonts
+   Brand fonts are proprietary:
+   - "Nipera"  → logo wordmark "MAJUBAH" + titling.  SUBSTITUTE: Sora (geometric grotesque, nearest free match).
+   - "Glamour" → logo baseline "CONSULTING" only. Not used outside the lockup; no substitute needed.
+   - "Lato"    → official accompaniment typeface (Google Font). Used as-is for body & UI.
+   If you have the licensed Nipera files, drop them in /assets/fonts and replace the Sora @font-face below. */
+
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,400;1,700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
