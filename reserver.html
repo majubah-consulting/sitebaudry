@@ -274,9 +274,6 @@
   </div>
 </main>
 
-<!-- Cible invisible : l'envoi vers Brevo charge sa réponse ici, sans rediriger le visiteur -->
-<iframe id="brevoSink" name="brevoSink" title="Envoi Brevo" style="display:none;width:0;height:0;border:0;" aria-hidden="true"></iframe>
-
 <footer class="site-footer">
   <div class="container">
     <div class="footer-grid">
@@ -486,34 +483,19 @@
     return d;
   }
 
-  // Envoie les champs vers Brevo via un POST natif ciblant l'iframe invisible
-  // (pas de redirection, fonctionne sur GitHub Pages, aucune clé exposée).
+  // Envoie les champs vers Brevo. Le endpoint v2 exige multipart/form-data :
+  // FormData le produit automatiquement. mode:"no-cors" car Brevo ne renvoie pas
+  // d'en-têtes CORS — la requête part et crée le contact (réponse opaque, peu
+  // importe : Web3Forms reste notre signal de succès fiable).
   function sendToBrevo(fields, done) {
-    var iframe = document.getElementById("brevoSink");
+    var fd = new FormData();
+    Object.keys(fields).forEach(function (k) { fd.append(k, fields[k] == null ? "" : String(fields[k])); });
     var settled = false, timer;
-    function finish(ok) {
-      if (settled) return; settled = true;
-      iframe.removeEventListener("load", onLoad);
-      window.clearTimeout(timer);
-      done(ok);
-    }
-    function onLoad() { finish(true); }
-    var f = document.createElement("form");
-    f.action = BREVO_ACTION; f.method = "POST"; f.target = "brevoSink"; f.style.display = "none";
-    // Le endpoint Brevo v2 exige multipart/form-data (refuse l'urlencoded par défaut)
-    f.enctype = "multipart/form-data";
-    f.setAttribute("enctype", "multipart/form-data");
-    f.setAttribute("accept-charset", "UTF-8");
-    Object.keys(fields).forEach(function (k) {
-      var inp = document.createElement("input");
-      inp.type = "hidden"; inp.name = k; inp.value = fields[k] == null ? "" : String(fields[k]);
-      f.appendChild(inp);
-    });
-    document.body.appendChild(f);
-    iframe.addEventListener("load", onLoad);
-    timer = window.setTimeout(function () { finish(true); }, 5000); // repli si l'évènement load ne se déclenche pas
-    try { f.submit(); } catch (_) { finish(false); }
-    window.setTimeout(function () { if (f.parentNode) f.parentNode.removeChild(f); }, 7000);
+    function finish(ok) { if (settled) return; settled = true; window.clearTimeout(timer); done(ok); }
+    timer = window.setTimeout(function () { finish(true); }, 6000); // sécurité anti-blocage
+    fetch(BREVO_ACTION, { method: "POST", body: fd, mode: "no-cors" })
+      .then(function () { finish(true); })
+      .catch(function () { finish(false); });
   }
 
   // ---- Alerte e-mail à Baudry via Web3Forms (clé publique, sans backend) ----
