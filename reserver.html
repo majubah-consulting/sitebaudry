@@ -3,28 +3,114 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Réserver une place | Formation IA MAJUBAH</title>
-  <meta name="description" content="Demande de préinscription à la formation IA de MAJUBAH : choisissez votre modalité et vos disponibilités. Réponse sous 48 heures ouvrées.">
-  <meta name="robots" content="noindex">
+  <title>Préinscription Formation IA à Pont-Audemer | MAJUBAH</title>
+  <meta name="description" content="Choisissez votre session de formation IA de trois jours à Pont-Audemer et envoyez votre demande de préinscription à MAJUBAH.">
   <link rel="canonical" href="https://EXEMPLE-DOMAINE/reserver.html">
   <link rel="stylesheet" href="_ds/majubah-consulting-design-system-a0b60080-30af-45d8-a878-bd93d04e39d7/tokens/fonts.css">
   <link rel="stylesheet" href="_ds/majubah-consulting-design-system-a0b60080-30af-45d8-a878-bd93d04e39d7/tokens/colors.css">
   <link rel="stylesheet" href="assets/site.css?v=2">
   <style>
-    .steps { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:28px; list-style:none; }
-    .steps li { font:700 12px var(--font-body); letter-spacing:.04em; color:var(--text-muted); padding:8px 12px; border-radius:999px; background:var(--surface-muted); border:1px solid var(--border-subtle); }
-    .steps li[aria-current="step"] { color:#fff; background:var(--primary); border-color:var(--primary); }
-    .steps li.done { color:var(--color-success); border-color:var(--color-success); }
-    .step { display:none; }
-    .step.is-active { display:block; }
-    .opt { display:block; border:1px solid var(--border-default); border-radius:var(--radius); padding:14px 16px; margin-bottom:10px; cursor:pointer; font-weight:600; color:var(--text-strong); }
-    .opt:hover { border-color:var(--primary); }
-    .opt input { margin-right:10px; }
-    .opt:has(input:checked) { border-color:var(--primary); box-shadow:0 0 0 2px var(--focus-ring); }
-    .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:0 18px; }
-    @media (max-width:560px){ .grid2 { grid-template-columns:1fr; } }
-    .step-actions { display:flex; justify-content:space-between; gap:12px; margin-top:24px; }
-    .hp { position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden; }
+    /* ===== Page préinscription — tunnel 3 étapes (styles propres à la page) ===== */
+
+    /* En-tête simplifié */
+    .rsv-bar { min-height: var(--header-h); gap: 16px; }
+    .rsv-bar__links { display: flex; align-items: center; gap: 22px; }
+    .rsv-bar__links a { font: 600 14px var(--font-body); color: var(--text-body); text-decoration: none; white-space: nowrap; }
+    .rsv-bar__links a:hover { color: var(--text-strong); }
+    @media (max-width: 560px) {
+      .rsv-bar { gap: 10px; }
+      .rsv-bar__links { gap: 14px; }
+      .rsv-bar__links a { font-size: 13px; }
+    }
+    @media (max-width: 400px) { .rsv-bar__contact { display: none; } }
+
+    /* Hero */
+    .rsv-hero { padding-block: clamp(28px, 5vw, 52px) 0; }
+    .rsv-facts { display: flex; flex-wrap: wrap; gap: 10px; margin: 24px 0 18px; padding: 0; list-style: none; }
+    .rsv-facts li { display: inline-flex; align-items: center; gap: 9px; font: 600 14px var(--font-body); color: var(--text-strong); background: var(--surface-bleu-wash); border: 1px solid var(--border-subtle); border-radius: 999px; padding: 9px 16px; }
+    .rsv-facts li::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); flex: none; }
+    .rsv-reassure { font-size: 14px; color: var(--text-muted); max-width: 64ch; margin: 0; }
+
+    /* Progression */
+    .rsv-progress { margin: clamp(28px, 4vw, 40px) 0 26px; }
+    .rsv-steps { display: flex; gap: 10px; list-style: none; padding: 0; margin: 0; }
+    .rsv-steps li { flex: 1; display: flex; }
+    .rsv-step { display: flex; align-items: center; gap: 10px; width: 100%; text-align: left; background: var(--surface-muted); border: 1px solid var(--border-subtle); border-radius: var(--radius); padding: 12px 14px; font: 700 14px var(--font-body); color: var(--text-muted); cursor: default; }
+    .rsv-step__num { flex: none; width: 26px; height: 26px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; background: #fff; border: 1px solid var(--border-default); font-size: 13px; color: var(--text-muted); }
+    .rsv-step.is-current { background: var(--primary); border-color: var(--primary); color: #fff; }
+    .rsv-step.is-current .rsv-step__num { background: #fff; color: var(--primary); border-color: #fff; }
+    .rsv-step.is-done { color: var(--color-success); border-color: var(--color-success); background: var(--color-success-bg); cursor: pointer; }
+    .rsv-step.is-done .rsv-step__num { background: var(--color-success); color: #fff; border-color: var(--color-success); }
+    .rsv-step[disabled] { cursor: default; }
+    .rsv-step-mobile { display: none; font: 700 13px var(--font-body); color: var(--text-muted); letter-spacing: .04em; margin: 14px 0 0; }
+    @media (max-width: 620px) {
+      .rsv-step__label { display: none; }
+      .rsv-step { justify-content: center; padding: 12px; }
+      .rsv-step-mobile { display: block; }
+    }
+
+    /* Étapes */
+    .rsv-step-panel { display: none; }
+    .rsv-step-panel.is-active { display: block; }
+    .rsv-fset { border: 0; padding: 0; margin: 0; min-width: 0; }
+    .rsv-fset > legend { font: 600 clamp(20px, 2.4vw, 24px) var(--font-display); color: var(--text-strong); margin-bottom: 8px; padding: 0; }
+    .rsv-fset__sub { color: var(--text-muted); font-size: 15px; margin: 0 0 22px; max-width: 60ch; }
+
+    /* Cartes de session (boutons radio) */
+    .rsv-sessions { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    @media (max-width: 560px) { .rsv-sessions { grid-template-columns: 1fr; } }
+    .rsv-card { position: relative; display: flex; gap: 12px; align-items: flex-start; border: 1.5px solid var(--border-default); border-radius: var(--radius); padding: 16px 18px; cursor: pointer; background: #fff; transition: border-color .15s, box-shadow .15s; }
+    .rsv-card:hover { border-color: var(--primary); }
+    .rsv-card input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+    .rsv-card:has(input:checked) { border-color: var(--primary); box-shadow: 0 0 0 2px var(--focus-ring); }
+    .rsv-card:has(input:focus-visible) { box-shadow: 0 0 0 3px var(--focus-ring); }
+    .rsv-card__body { display: flex; flex-direction: column; gap: 3px; }
+    .rsv-card__date { font: 700 16px var(--font-display); color: var(--text-strong); letter-spacing: .01em; }
+    .rsv-card__sub { font-size: 13px; color: var(--text-muted); }
+    .rsv-card__meta { font-size: 13px; color: var(--text-body); }
+    .rsv-card__check { margin-left: auto; flex: none; width: 24px; height: 24px; border-radius: 50%; border: 1px solid var(--border-default); display: inline-flex; align-items: center; justify-content: center; color: transparent; font-size: 14px; line-height: 1; }
+    .rsv-card:has(input:checked) .rsv-card__check { background: var(--primary); border-color: var(--primary); color: #fff; }
+    .rsv-card--alt { grid-column: 1 / -1; }
+    .rsv-card--alt .rsv-card__date { font: 600 15px var(--font-display); }
+    .rsv-alt-field { margin-top: 14px; }
+
+    /* Options radio / cases (financement, consentements) */
+    .rsv-opt { display: flex; gap: 11px; align-items: flex-start; border: 1px solid var(--border-default); border-radius: var(--radius); padding: 13px 15px; margin-bottom: 10px; cursor: pointer; font: 600 15px var(--font-body); color: var(--text-strong); }
+    .rsv-opt:hover { border-color: var(--primary); }
+    .rsv-opt input { margin-top: 2px; flex: none; }
+    .rsv-opt:has(input:checked) { border-color: var(--primary); box-shadow: 0 0 0 2px var(--focus-ring); }
+    .rsv-opt--consent { font-weight: 400; font-size: 14px; color: var(--text-body); }
+    .rsv-opt--consent a { color: var(--text-body); }
+    .rsv-legal { font-size: 13px; color: var(--text-muted); margin: 4px 0 22px; }
+
+    /* Récapitulatif (étape 3) */
+    .rsv-recap { background: var(--surface-muted); border: 1px solid var(--border-subtle); border-radius: var(--radius); padding: 18px 20px; margin-bottom: 24px; }
+    .rsv-recap h3 { font: 700 14px var(--font-body); letter-spacing: .04em; text-transform: uppercase; color: var(--text-muted); margin: 0 0 12px; }
+    .rsv-recap ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 9px; }
+    .rsv-recap li { display: flex; gap: 10px; font-size: 15px; color: var(--text-body); }
+    .rsv-recap li::before { content: ""; flex: none; width: 12px; height: 7px; margin-top: 6px; border-left: 2px solid var(--accent); border-bottom: 2px solid var(--accent); transform: rotate(-45deg); }
+
+    /* Actions de navigation */
+    .rsv-actions { display: flex; align-items: center; gap: 12px; margin-top: 28px; }
+    .rsv-actions .rsv-spacer { flex: 1; }
+    .rsv-actions .btn { min-height: 50px; }
+    @media (max-width: 480px) {
+      .rsv-actions { flex-direction: column-reverse; align-items: stretch; }
+      .rsv-actions .rsv-spacer { display: none; }
+      .rsv-actions .btn { width: 100%; }
+    }
+
+    /* Écran de confirmation */
+    .rsv-check-badge { display: inline-flex; width: 56px; height: 56px; align-items: center; justify-content: center; border-radius: 50%; background: var(--color-success-bg); color: var(--color-success); margin-bottom: 10px; }
+    .rsv-confirm-recap { text-align: left; max-width: 440px; margin: 22px auto; }
+    .rsv-confirm-recap ul { list-style: none; padding: 0; margin: 0; }
+    .rsv-confirm-recap li { display: flex; justify-content: space-between; gap: 16px; padding: 11px 0; border-bottom: 1px solid var(--border-subtle); font-size: 15px; }
+    .rsv-confirm-recap li:last-child { border-bottom: 0; }
+    .rsv-confirm-recap li span { color: var(--text-muted); }
+    .rsv-confirm-recap li strong { color: var(--text-strong); text-align: right; }
+    .rsv-confirm-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 8px; }
+
+    .hp { position: absolute !important; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
   </style>
   <script defer src="assets/site.config.js"></script>
   <script defer src="assets/site.js?v=2"></script>
@@ -32,121 +118,158 @@
 <body>
 <a class="skip-link" href="#main">Aller au contenu</a>
 
+<!-- En-tête simplifié : logo + retour formation + contact, sans CTA « Réserver » -->
 <header class="site-header">
   <div class="container">
-    <nav class="nav" data-open="false" aria-label="Navigation principale">
+    <div class="nav rsv-bar">
       <a class="nav__logo" href="index.html" aria-label="MAJUBAH Consulting — accueil"><img src="assets/logo/majubah-horizontal.png" alt="MAJUBAH Consulting"></a>
-      <ul class="nav__menu" role="list">
-        <li><a class="nav__link" href="formation-ia.html">Formation IA</a></li>
-        <li><a class="nav__link" href="campus-numerique.html">Campus numérique</a></li>
-        <li><a class="nav__link" href="ateliers-ia.html">Ateliers</a></li>
-        <li><a class="nav__link" href="contact.html">Contact</a></li>
-      </ul>
-      <div class="nav__cta">
-        <a class="nav__campus" data-mjb-href="campusUrl" href="https://majubah.teachizy.fr/formations/campus-ia" rel="noopener">Accéder au Campus</a>
-        <a class="btn btn--primary" href="reserver.html" aria-current="page">Réserver une place</a>
-      </div>
-      <button class="nav__toggle" type="button" aria-expanded="false" aria-label="Ouvrir le menu"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
-    </nav>
+      <nav class="rsv-bar__links" aria-label="Liens utiles">
+        <a class="rsv-bar__back" href="formation-ia.html">← Retour à la formation</a>
+        <a class="rsv-bar__contact" href="contact.html">Une question ? Contactez-nous</a>
+      </nav>
+    </div>
   </div>
 </header>
 
 <main id="main" class="section">
   <div class="container" style="max-width:720px;">
-    <div class="reveal" style="margin-bottom:8px;"><p class="eyebrow">Demande de réservation</p><h1 style="font-size:clamp(28px,4vw,42px);">Réservez votre place</h1>
-      <p class="lead">Votre demande constitue une <strong>préinscription</strong>. Votre place sera définitive après confirmation de la session et validation de votre inscription.</p></div>
 
-    <!-- Panneau formulaire -->
-    <div id="formPanel">
-      <ol class="steps" aria-hidden="true">
-        <li data-dot="1" aria-current="step">Besoin</li><li data-dot="2">Modalité</li><li data-dot="3">Date</li><li data-dot="4">Coordonnées</li><li data-dot="5">Financement</li><li data-dot="6">Consentement</li>
-      </ol>
-
-      <form id="reserveForm" novalidate>
-        <!-- anti-spam -->
-        <div class="hp" aria-hidden="true"><label>Ne pas remplir <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
-        <input type="hidden" name="utm_source"><input type="hidden" name="utm_medium"><input type="hidden" name="utm_campaign">
-
-        <!-- ÉTAPE 1 BESOIN -->
-        <fieldset class="step is-active" data-step="1" style="border:0;padding:0;margin:0;">
-          <legend style="font:600 20px var(--font-display);color:var(--text-strong);margin-bottom:14px;">Quel est votre besoin ?</legend>
-          <label class="opt"><input type="radio" name="offer_interest" value="formation" required>Participer à la formation IA de trois jours</label>
-          <label class="opt"><input type="radio" name="offer_interest" value="equipe">Former mon équipe</label>
-          <label class="opt"><input type="radio" name="offer_interest" value="campus">Rejoindre le Campus numérique</label>
-          <label class="opt"><input type="radio" name="offer_interest" value="atelier">Participer à un atelier</label>
-          <label class="opt"><input type="radio" name="offer_interest" value="autre">Poser une autre question</label>
-        </fieldset>
-
-        <!-- ÉTAPE 2 MODALITÉ -->
-        <fieldset class="step" data-step="2" style="border:0;padding:0;margin:0;">
-          <legend style="font:600 20px var(--font-display);color:var(--text-strong);margin-bottom:14px;">Quelle modalité ?</legend>
-          <label class="opt"><input type="radio" name="preferred_mode" value="in_person" required>Présentiel à Pont-Audemer</label>
-          <label class="opt"><input type="radio" name="preferred_mode" value="remote">Classe virtuelle</label>
-          <label class="opt"><input type="radio" name="preferred_mode" value="any">Indifférent — je souhaite connaître les prochaines possibilités</label>
-        </fieldset>
-
-        <!-- ÉTAPE 3 DATE -->
-        <fieldset class="step" data-step="3" style="border:0;padding:0;margin:0;">
-          <legend style="font:600 20px var(--font-display);color:var(--text-strong);margin-bottom:14px;">Choisissez une date</legend>
-          <div id="sessionsList"><!-- rempli par JS depuis la config --></div>
-          <div id="noSession" hidden>
-            <p>Aucune session n'est programmée à une date fixe pour le moment.</p>
-            <div class="field"><label for="availability">Indiquez vos périodes de disponibilité</label>
-              <textarea id="availability" name="availability" rows="3" placeholder="Ex. : 2ᵉ quinzaine de septembre, ou semaines 40-42…"></textarea></div>
-            <label class="opt" style="margin-top:6px;"><input type="checkbox" name="notify_dates" value="oui" checked>Je souhaite être informé des prochaines dates</label>
-          </div>
-        </fieldset>
-
-        <!-- ÉTAPE 4 COORDONNÉES -->
-        <fieldset class="step" data-step="4" style="border:0;padding:0;margin:0;">
-          <legend style="font:600 20px var(--font-display);color:var(--text-strong);margin-bottom:14px;">Vos coordonnées</legend>
-          <div class="grid2">
-            <div class="field"><label for="first_name">Prénom</label><input id="first_name" name="first_name" autocomplete="given-name" required></div>
-            <div class="field"><label for="last_name">Nom</label><input id="last_name" name="last_name" autocomplete="family-name" required></div>
-            <div class="field"><label for="company">Entreprise</label><input id="company" name="company" autocomplete="organization"></div>
-            <div class="field"><label for="job_title">Fonction</label><input id="job_title" name="job_title" autocomplete="organization-title"></div>
-            <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required></div>
-            <div class="field"><label for="phone">Téléphone</label><input id="phone" name="phone" type="tel" autocomplete="tel"></div>
-            <div class="field"><label for="city">Ville ou code postal</label><input id="city" name="city" autocomplete="address-level2"></div>
-          </div>
-          <div class="field"><label for="message">Message (facultatif)</label><textarea id="message" name="message" rows="3"></textarea></div>
-        </fieldset>
-
-        <!-- ÉTAPE 5 FINANCEMENT -->
-        <fieldset class="step" data-step="5" style="border:0;padding:0;margin:0;">
-          <legend style="font:600 20px var(--font-display);color:var(--text-strong);margin-bottom:14px;">Financement envisagé</legend>
-          <label class="opt"><input type="radio" name="funding_type" value="personnel" required>Financement personnel</label>
-          <label class="opt"><input type="radio" name="funding_type" value="entreprise">Financement par mon entreprise</label>
-          <label class="opt"><input type="radio" name="funding_type" value="cpf">CPF</label>
-          <label class="opt"><input type="radio" name="funding_type" value="opco">OPCO ou autre financement à étudier</label>
-          <label class="opt"><input type="radio" name="funding_type" value="inconnu">Je ne sais pas encore</label>
-          <p class="muted" style="font-size:13px;margin-top:10px;">L'acceptation d'un financement dépend de votre situation et des règles en vigueur ; nous ne pouvons pas la garantir.</p>
-        </fieldset>
-
-        <!-- ÉTAPE 6 CONSENTEMENT -->
-        <fieldset class="step" data-step="6" style="border:0;padding:0;margin:0;">
-          <legend style="font:600 20px var(--font-display);color:var(--text-strong);margin-bottom:14px;">Consentement</legend>
-          <label class="opt"><input type="checkbox" name="consent_privacy" value="oui" required>J'accepte que ma demande soit traitée par MAJUBAH. Voir la <a href="politique-confidentialite.html" target="_blank" rel="noopener">politique de confidentialité</a>.</label>
-          <label class="opt"><input type="checkbox" name="consent_marketing" value="oui">J'accepte de recevoir des informations sur les prochaines sessions (facultatif).</label>
-        </fieldset>
-
-        <p id="formStatus" class="form-status" role="status" aria-live="polite" style="min-height:1.2em;"></p>
-        <div class="step-actions">
-          <button type="button" class="btn btn--secondary" id="prevBtn" hidden>Précédent</button>
-          <span style="flex:1"></span>
-          <button type="button" class="btn btn--primary" id="nextBtn">Suivant</button>
-          <button type="submit" class="btn btn--accent" id="submitBtn" hidden>Envoyer ma demande</button>
-        </div>
-      </form>
+    <!-- HERO -->
+    <div class="rsv-hero reveal">
+      <p class="eyebrow">Préinscription</p>
+      <h1 style="font-size:clamp(28px,4vw,42px);">Réservez votre session de formation IA</h1>
+      <p class="lead">Trois jours de formation pratique à Pont-Audemer pour apprendre à utiliser l'intelligence artificielle dans votre activité professionnelle.</p>
+      <ul class="rsv-facts">
+        <li>3 jours de formation</li>
+        <li>6 participants maximum</li>
+        <li>Aucun paiement demandé aujourd'hui</li>
+      </ul>
+      <p class="rsv-reassure">Votre demande sera examinée personnellement. Votre inscription deviendra définitive après confirmation de la session et validation de votre dossier.</p>
     </div>
 
-    <!-- Panneau confirmation -->
-    <div id="confirmPanel" class="card" hidden style="text-align:center;">
-      <span style="display:inline-flex;width:56px;height:56px;align-items:center;justify-content:center;border-radius:50%;background:var(--color-success-bg);color:var(--color-success);margin-bottom:8px;"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg></span>
-      <h2>Votre demande a bien été transmise.</h2>
-      <p style="max-width:46ch;margin-inline:auto;">Baudry ou un membre de MAJUBAH vous recontactera personnellement sous 48 heures ouvrées. Votre place sera définitive après confirmation de la session et validation de votre inscription.</p>
-      <div id="confirmSummary" style="text-align:left;max-width:420px;margin:20px auto;font-size:15px;color:var(--text-body);"></div>
-      <a class="btn btn--secondary" href="index.html">Revenir à l'accueil</a>
+    <div id="formTop">
+      <!-- PROGRESSION -->
+      <div class="rsv-progress">
+        <ol class="rsv-steps">
+          <li><button type="button" class="rsv-step is-current" data-goto="0" aria-current="step"><span class="rsv-step__num">1</span><span class="rsv-step__label">Session</span></button></li>
+          <li><button type="button" class="rsv-step" data-goto="1" disabled><span class="rsv-step__num">2</span><span class="rsv-step__label">Coordonnées</span></button></li>
+          <li><button type="button" class="rsv-step" data-goto="2" disabled><span class="rsv-step__num">3</span><span class="rsv-step__label">Confirmation</span></button></li>
+        </ol>
+        <p class="rsv-step-mobile" id="stepMobile" aria-live="polite">Étape 1 sur 3</p>
+      </div>
+
+      <!-- PANNEAU FORMULAIRE -->
+      <div id="formPanel">
+        <form id="reserveForm" novalidate>
+          <!-- anti-spam (honeypot) -->
+          <div class="hp" aria-hidden="true"><label>Ne pas remplir <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+          <input type="hidden" name="utm_source"><input type="hidden" name="utm_medium"><input type="hidden" name="utm_campaign">
+
+          <!-- ÉTAPE 1 — SESSION -->
+          <div class="rsv-step-panel is-active" data-step="0">
+            <fieldset class="rsv-fset">
+              <legend>Choisissez votre session à Pont-Audemer</legend>
+              <p class="rsv-fset__sub">Chaque session se déroule du lundi au mercredi et accueille 6 participants maximum.</p>
+              <div class="rsv-sessions" id="sessionsList"><!-- cartes générées par JS --></div>
+              <div class="rsv-alt-field field" id="altField" hidden>
+                <label for="availability">Indiquez vos périodes de disponibilité <span class="muted">(facultatif)</span></label>
+                <textarea id="availability" name="availability" rows="3" placeholder="Ex. : première quinzaine de septembre"></textarea>
+              </div>
+            </fieldset>
+          </div>
+
+          <!-- ÉTAPE 2 — COORDONNÉES -->
+          <div class="rsv-step-panel" data-step="1">
+            <fieldset class="rsv-fset">
+              <legend>Vos coordonnées</legend>
+              <p class="rsv-fset__sub">Ces informations nous permettent de vous recontacter pour confirmer votre session.</p>
+              <div class="grid2">
+                <div class="field">
+                  <label for="first_name">Prénom</label>
+                  <input id="first_name" name="first_name" type="text" autocomplete="given-name" aria-describedby="err-first_name" required>
+                  <span class="field__error" id="err-first_name" role="alert"></span>
+                </div>
+                <div class="field">
+                  <label for="last_name">Nom</label>
+                  <input id="last_name" name="last_name" type="text" autocomplete="family-name" aria-describedby="err-last_name" required>
+                  <span class="field__error" id="err-last_name" role="alert"></span>
+                </div>
+                <div class="field">
+                  <label for="email">Adresse e-mail</label>
+                  <input id="email" name="email" type="email" autocomplete="email" aria-describedby="err-email" required>
+                  <span class="field__error" id="err-email" role="alert"></span>
+                </div>
+                <div class="field">
+                  <label for="phone">Téléphone</label>
+                  <input id="phone" name="phone" type="tel" autocomplete="tel" aria-describedby="err-phone" required>
+                  <span class="field__error" id="err-phone" role="alert"></span>
+                </div>
+                <div class="field">
+                  <label for="company">Entreprise <span class="muted">(facultatif)</span></label>
+                  <input id="company" name="company" type="text" autocomplete="organization">
+                </div>
+                <div class="field">
+                  <label for="job_title">Fonction <span class="muted">(facultatif)</span></label>
+                  <input id="job_title" name="job_title" type="text" autocomplete="organization-title">
+                </div>
+              </div>
+            </fieldset>
+          </div>
+
+          <!-- ÉTAPE 3 — FINANCEMENT ET CONFIRMATION -->
+          <div class="rsv-step-panel" data-step="2">
+            <fieldset class="rsv-fset">
+              <legend>Finalisez votre préinscription</legend>
+              <div class="rsv-recap">
+                <h3>Votre demande</h3>
+                <ul id="recapList"><!-- généré par JS --></ul>
+              </div>
+
+              <fieldset class="rsv-fset" style="margin-bottom:8px;">
+                <legend style="font:600 17px var(--font-display);margin-bottom:14px;">Comment envisagez-vous de financer votre formation ?</legend>
+                <label class="rsv-opt"><input type="radio" name="funding_type" value="personnel">Financement personnel</label>
+                <label class="rsv-opt"><input type="radio" name="funding_type" value="entreprise">Financement par mon entreprise</label>
+                <label class="rsv-opt"><input type="radio" name="funding_type" value="cpf">CPF</label>
+                <label class="rsv-opt"><input type="radio" name="funding_type" value="opco">OPCO ou autre financement à étudier</label>
+                <label class="rsv-opt"><input type="radio" name="funding_type" value="inconnu">Je ne sais pas encore</label>
+              </fieldset>
+              <p class="rsv-legal">L'acceptation d'un financement dépend de votre situation et des règles en vigueur. MAJUBAH ne peut pas garantir sa prise en charge.</p>
+
+              <label class="rsv-opt rsv-opt--consent"><input type="checkbox" name="consent_privacy" value="oui">J'accepte que mes informations soient utilisées par MAJUBAH pour traiter ma demande de préinscription. <a href="politique-confidentialite.html" target="_blank" rel="noopener">Consulter la politique de confidentialité</a>.</label>
+              <label class="rsv-opt rsv-opt--consent"><input type="checkbox" name="consent_marketing" value="oui">Je souhaite recevoir les prochaines dates et les informations de MAJUBAH.</label>
+            </fieldset>
+          </div>
+
+          <p id="formStatus" class="form-status" role="status" aria-live="assertive" style="min-height:1.2em;margin-top:18px;"></p>
+
+          <div class="rsv-actions">
+            <button type="button" class="btn btn--secondary" id="prevBtn" hidden>Retour</button>
+            <span class="rsv-spacer"></span>
+            <button type="button" class="btn btn--primary" id="nextBtn" disabled>Continuer</button>
+            <button type="submit" class="btn btn--accent" id="submitBtn" hidden>Envoyer ma préinscription</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- PANNEAU CONFIRMATION -->
+      <div id="confirmPanel" class="card" hidden style="text-align:center;">
+        <span class="rsv-check-badge" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg></span>
+        <h2>Votre demande a bien été envoyée</h2>
+        <p style="max-width:48ch;margin-inline:auto;">Merci. Vous recevrez immédiatement un récapitulatif par e-mail. Je vous recontacterai personnellement sous 48 heures pour confirmer la session et finaliser votre inscription.</p>
+        <div class="rsv-confirm-recap">
+          <ul role="list">
+            <li><span>Participant</span><strong id="confirmName">—</strong></li>
+            <li><span>Session demandée</span><strong id="confirmSession">—</strong></li>
+            <li><span>Modalité</span><strong>Présentiel</strong></li>
+            <li><span>Lieu</span><strong>Pont-Audemer</strong></li>
+            <li><span>Financement envisagé</span><strong id="confirmFunding">—</strong></li>
+          </ul>
+        </div>
+        <div class="rsv-confirm-actions">
+          <a class="btn btn--secondary" href="index.html">Retourner à l'accueil</a>
+          <a class="btn btn--primary" href="campus-numerique.html">Découvrir le Campus numérique</a>
+        </div>
+      </div>
     </div>
   </div>
 </main>
@@ -166,95 +289,249 @@
 (function () {
   "use strict";
   var cfg = window.MAJUBAH || {};
+
+  // ---- Données centralisées des sessions (présentiel · Pont-Audemer · 2026) ----
+  var SESSIONS = [
+    { id: "2026-07-13", startDate: "2026-07-13", endDate: "2026-07-15", dateLabel: "13 – 15 JUILLET", label: "Du 13 au 15 juillet 2026", location: "Pont-Audemer", format: "Présentiel" },
+    { id: "2026-07-20", startDate: "2026-07-20", endDate: "2026-07-22", dateLabel: "20 – 22 JUILLET", label: "Du 20 au 22 juillet 2026", location: "Pont-Audemer", format: "Présentiel" },
+    { id: "2026-07-27", startDate: "2026-07-27", endDate: "2026-07-29", dateLabel: "27 – 29 JUILLET", label: "Du 27 au 29 juillet 2026", location: "Pont-Audemer", format: "Présentiel" },
+    { id: "2026-08-17", startDate: "2026-08-17", endDate: "2026-08-19", dateLabel: "17 – 19 AOÛT", label: "Du 17 au 19 août 2026", location: "Pont-Audemer", format: "Présentiel" },
+    { id: "2026-08-24", startDate: "2026-08-24", endDate: "2026-08-26", dateLabel: "24 – 26 AOÛT", label: "Du 24 au 26 août 2026", location: "Pont-Audemer", format: "Présentiel" }
+  ];
+
   var form = document.getElementById("reserveForm");
-  var steps = Array.prototype.slice.call(form.querySelectorAll(".step"));
-  var dots = Array.prototype.slice.call(document.querySelectorAll(".steps li"));
-  var prevBtn = document.getElementById("prevBtn"), nextBtn = document.getElementById("nextBtn"), submitBtn = document.getElementById("submitBtn");
+  var panels = [].slice.call(form.querySelectorAll(".rsv-step-panel"));
+  var stepBtns = [].slice.call(document.querySelectorAll(".rsv-step"));
+  var stepMobile = document.getElementById("stepMobile");
+  var prevBtn = document.getElementById("prevBtn");
+  var nextBtn = document.getElementById("nextBtn");
+  var submitBtn = document.getElementById("submitBtn");
   var statusEl = document.getElementById("formStatus");
+  var altField = document.getElementById("altField");
+  var availInput = document.getElementById("availability");
+  var TOTAL = panels.length; // 3
   var current = 0;
+  var sending = false;
 
-  // Préremplir le besoin depuis ?besoin=
+  // ---- Capture UTM ----
   var qs = new URLSearchParams(location.search);
-  var besoin = qs.get("besoin");
-  var besoinMap = { equipe:"equipe", campus:"campus", atelier:"atelier", programme:"formation" };
-  if (besoin && besoinMap[besoin]) {
-    var r = form.querySelector('input[name="offer_interest"][value="'+besoinMap[besoin]+'"]');
-    if (r) r.checked = true;
-  }
-  // UTM
-  ["utm_source","utm_medium","utm_campaign"].forEach(function(k){ var v=qs.get(k); if(v) form.querySelector('input[name="'+k+'"]').value=v; });
+  ["utm_source", "utm_medium", "utm_campaign"].forEach(function (k) {
+    var v = qs.get(k); var el = form.querySelector('input[name="' + k + '"]');
+    if (v && el) el.value = v;
+  });
 
-  // Étape 3 : sessions depuis la config
-  (function renderSessions(){
-    var list = document.getElementById("sessionsList"), none = document.getElementById("noSession");
-    var sessions = (cfg.sessions || []).filter(function(s){ return s.status !== "cancelled"; });
-    if (!sessions.length) { none.hidden = false; return; }
-    var labelMode = { in_person:"Présentiel · Pont-Audemer", remote:"Classe virtuelle" };
-    var labelStatus = { pre_registration_open:"Préinscriptions ouvertes", confirmed:"Session confirmée", full:"Complet" };
-    sessions.forEach(function(s){
-      var disabled = s.status === "full";
-      var l = document.createElement("label"); l.className = "opt";
-      l.innerHTML = '<input type="radio" name="session_id" value="'+s.id+'"'+(disabled?" disabled":"")+'> '
-        + '<strong>'+ (s.startDate||"") + (s.endDate?(" → "+s.endDate):"") +'</strong> — '+(labelMode[s.mode]||s.mode)
-        + ' <span class="badge" style="margin-left:6px;">'+(labelStatus[s.status]||s.status)+'</span>';
+  // ---- Rendu des cartes de session ----
+  (function renderSessions() {
+    var list = document.getElementById("sessionsList");
+    SESSIONS.forEach(function (s) {
+      var l = document.createElement("label");
+      l.className = "rsv-card";
+      l.innerHTML =
+        '<input type="radio" name="session_id" value="' + s.id + '">'
+        + '<span class="rsv-card__body">'
+        + '<span class="rsv-card__date">' + s.dateLabel + '</span>'
+        + '<span class="rsv-card__sub">Du lundi au mercredi · 2026</span>'
+        + '<span class="rsv-card__meta">Présentiel à Pont-Audemer</span>'
+        + '<span class="rsv-card__meta">6 participants maximum</span>'
+        + '</span>'
+        + '<span class="rsv-card__check" aria-hidden="true">✓</span>';
       list.appendChild(l);
     });
-    var wait = document.createElement("label"); wait.className="opt";
-    wait.innerHTML = '<input type="radio" name="session_id" value="liste_attente"> Aucune date ne me convient — je souhaite être informé des prochaines dates';
-    list.appendChild(wait);
+    var alt = document.createElement("label");
+    alt.className = "rsv-card rsv-card--alt";
+    alt.innerHTML =
+      '<input type="radio" name="session_id" value="autre">'
+      + '<span class="rsv-card__body">'
+      + '<span class="rsv-card__date">Aucune de ces dates ne me convient</span>'
+      + '<span class="rsv-card__sub">Indiquez vos disponibilités juste en dessous.</span>'
+      + '</span>'
+      + '<span class="rsv-card__check" aria-hidden="true">✓</span>';
+    list.appendChild(alt);
   })();
 
-  function show(i){
-    current = i;
-    steps.forEach(function(s,idx){ s.classList.toggle("is-active", idx===i); });
-    dots.forEach(function(d,idx){ d.removeAttribute("aria-current"); d.classList.toggle("done", idx<i); if(idx===i) d.setAttribute("aria-current","step"); });
-    prevBtn.hidden = i===0;
-    nextBtn.hidden = i===steps.length-1;
-    submitBtn.hidden = i!==steps.length-1;
-    statusEl.textContent = "";
-    var first = steps[i].querySelector("input,textarea,select"); if(first) first.focus();
-    document.getElementById("formPanel").scrollIntoView({ behavior:"smooth", block:"start" });
+  // Présélection éventuelle via ?session=ID
+  var pre = qs.get("session");
+  if (pre && /^[\w-]+$/.test(pre)) {
+    var preEl = form.querySelector('input[name="session_id"][value="' + pre + '"]');
+    if (preEl) { preEl.checked = true; if (pre === "autre") altField.hidden = false; }
   }
-  function validStep(i){
-    var fields = steps[i].querySelectorAll("[required]");
-    for (var j=0;j<fields.length;j++){ if(!fields[j].checkValidity()){ fields[j].reportValidity(); return false; } }
-    return true;
-  }
-  nextBtn.addEventListener("click", function(){ if(validStep(current)) show(Math.min(current+1, steps.length-1)); });
-  prevBtn.addEventListener("click", function(){ show(Math.max(current-1,0)); });
 
-  form.addEventListener("submit", function(e){
+  function selectedSession() { return form.querySelector('input[name="session_id"]:checked'); }
+
+  // Affiche/masque le champ disponibilités + (dé)verrouille « Continuer » à l'étape 1
+  form.addEventListener("change", function (e) {
+    if (e.target && e.target.name === "session_id") {
+      altField.hidden = e.target.value !== "autre";
+      updateNextEnabled();
+    }
+  });
+
+  function updateNextEnabled() {
+    if (current === 0) nextBtn.disabled = !selectedSession();
+    else nextBtn.disabled = false;
+  }
+
+  // ---- Validation par étape ----
+  function setError(field, msg) {
+    var wrap = field.closest(".field"); if (!wrap) return;
+    wrap.classList.add("field--error");
+    field.setAttribute("aria-invalid", "true");
+    var err = wrap.querySelector(".field__error"); if (err) err.textContent = msg;
+  }
+  function clearError(field) {
+    var wrap = field.closest(".field"); if (!wrap) return;
+    wrap.classList.remove("field--error");
+    field.removeAttribute("aria-invalid");
+    var err = wrap.querySelector(".field__error"); if (err) err.textContent = "";
+  }
+  form.addEventListener("input", function (e) { if (e.target.closest(".field")) clearError(e.target); });
+
+  function validateStep(i) {
+    if (i === 0) {
+      if (!selectedSession()) {
+        statusEl.setAttribute("data-kind", "error");
+        statusEl.textContent = "Sélectionnez une session, ou choisissez « Aucune de ces dates ne me convient ».";
+        return false;
+      }
+      return true;
+    }
+    if (i === 1) {
+      var ok = true, firstBad = null;
+      var checks = [
+        ["first_name", function (v) { return v.trim().length > 0; }, "Indiquez votre prénom."],
+        ["last_name", function (v) { return v.trim().length > 0; }, "Indiquez votre nom."],
+        ["email", function (v) { return /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v.trim()); }, "Indiquez une adresse e-mail valide."],
+        ["phone", function (v) { return v.replace(/[\s.\-()]/g, "").length >= 6; }, "Indiquez un numéro de téléphone."]
+      ];
+      checks.forEach(function (c) {
+        var f = form.elements[c[0]];
+        if (!c[1](f.value)) { setError(f, c[2]); if (!firstBad) firstBad = f; ok = false; }
+        else clearError(f);
+      });
+      if (!ok && firstBad) { try { firstBad.focus(); } catch (_) {} }
+      return ok;
+    }
+    return true; // l'étape 3 est validée à l'envoi
+  }
+
+  // ---- Navigation entre étapes ----
+  function show(i) {
+    current = i;
+    panels.forEach(function (p, idx) { p.classList.toggle("is-active", idx === i); });
+    stepBtns.forEach(function (b, idx) {
+      b.classList.toggle("is-current", idx === i);
+      b.classList.toggle("is-done", idx < i);
+      if (idx === i) b.setAttribute("aria-current", "step"); else b.removeAttribute("aria-current");
+      b.disabled = idx > i; // étapes futures non cliquables
+    });
+    stepMobile.textContent = "Étape " + (i + 1) + " sur " + TOTAL;
+    prevBtn.hidden = i === 0;
+    nextBtn.hidden = i === TOTAL - 1;
+    submitBtn.hidden = i !== TOTAL - 1;
+    statusEl.textContent = ""; statusEl.removeAttribute("data-kind");
+    if (i === 2) buildRecap();
+    updateNextEnabled();
+    document.getElementById("formTop").scrollIntoView({ behavior: "smooth", block: "start" });
+    if (i !== 0) {
+      var f = panels[i].querySelector("input:not([type=hidden]),textarea,select");
+      if (f) { try { f.focus({ preventScroll: true }); } catch (_) {} }
+    }
+  }
+
+  stepBtns.forEach(function (b, idx) {
+    b.addEventListener("click", function () { if (idx < current) show(idx); });
+  });
+  prevBtn.addEventListener("click", function () { show(Math.max(current - 1, 0)); });
+  nextBtn.addEventListener("click", function () { if (validateStep(current)) show(Math.min(current + 1, TOTAL - 1)); });
+
+  // ---- Récapitulatif (étape 3) ----
+  function buildRecap() {
+    var sess = selectedSession();
+    var obj = sess ? sessionById(sess.value) : null;
+    var dateLine;
+    if (obj) dateLine = obj.label;
+    else if (sess && sess.value === "autre") {
+      var a = availInput && availInput.value.trim();
+      dateLine = a ? ("Vos disponibilités : " + a) : "Dates à définir selon vos disponibilités";
+    } else dateLine = "—";
+    document.getElementById("recapList").innerHTML =
+      "<li>Formation IA – 3 jours</li>"
+      + "<li>" + escapeHtml(dateLine) + "</li>"
+      + "<li>Présentiel à Pont-Audemer</li>"
+      + "<li>6 participants maximum</li>"
+      + "<li>Aucun paiement demandé aujourd'hui</li>";
+  }
+  function sessionById(id) { for (var k = 0; k < SESSIONS.length; k++) if (SESSIONS[k].id === id) return SESSIONS[k]; return null; }
+
+  // ---- Envoi ----
+  form.addEventListener("submit", function (e) {
     e.preventDefault();
-    if(!validStep(current)) return;
-    if(form.website.value){ return; } // honeypot
-    submitBtn.disabled = true; statusEl.removeAttribute("data-kind"); statusEl.textContent = "Envoi en cours…";
+    if (sending) return;
+
+    var funding = form.querySelector('input[name="funding_type"]:checked');
+    var consent = form.elements["consent_privacy"];
+    var problems = [];
+    if (!funding) problems.push("Sélectionnez une option de financement.");
+    if (!consent.checked) problems.push("Vous devez accepter le traitement de vos informations pour envoyer votre demande.");
+    if (problems.length) {
+      statusEl.setAttribute("data-kind", "error");
+      statusEl.textContent = problems.join(" ");
+      return;
+    }
+    if (form.website && form.website.value) return; // honeypot
+
+    sending = true;
+    submitBtn.disabled = true; prevBtn.disabled = true;
+    submitBtn.textContent = "Envoi en cours…";
+    statusEl.removeAttribute("data-kind");
+    statusEl.textContent = "Envoi de votre préinscription…";
+
+    var sess = selectedSession();
+    var obj = sess ? sessionById(sess.value) : null;
     var data = Object.fromEntries(new FormData(form).entries());
+    // Valeurs implicites de ce tunnel (présentiel · formation 3 jours)
+    data.offer_interest = "formation";
+    data.preferred_mode = "in_person";
+    data.session_id = sess ? sess.value : "";
+    data.session_label = obj ? obj.label : (sess && sess.value === "autre" ? "Aucune date proposée — disponibilités à étudier" : "");
     data.lead_source = "site-reservation";
-    data.consent_privacy = form.consent_privacy.checked;
-    data.consent_marketing = form.consent_marketing.checked;
+    data.consent_privacy = consent.checked;
+    data.consent_marketing = form.elements["consent_marketing"].checked;
     data.created_at = new Date().toISOString();
-    fetch("/api/reservation", { method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify(data) })
-      .then(function(r){ if(!r.ok) throw new Error(String(r.status)); return r.json().catch(function(){return{};}); })
-      .then(function(){ showConfirmation(data); })
-      .catch(function(){
-        submitBtn.disabled = false;
-        statusEl.setAttribute("data-kind","error");
-        statusEl.innerHTML = 'Une erreur est survenue. Réessayez, ou écrivez-nous à <a href="mailto:'+(cfg.email||"")+'">'+(cfg.email||"")+'</a>.';
+
+    fetch("/api/reservation", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) })
+      .then(function (r) { if (!r.ok) throw new Error(String(r.status)); return r.json().catch(function () { return {}; }); })
+      .then(function () { showConfirmation(data, obj); })
+      .catch(function () {
+        sending = false;
+        submitBtn.disabled = false; prevBtn.disabled = false;
+        submitBtn.textContent = "Réessayer";
+        statusEl.setAttribute("data-kind", "error");
+        statusEl.innerHTML = "Votre demande n'a pas pu être envoyée. Vos informations sont conservées : cliquez sur « Réessayer », ou écrivez-nous à <a href=\"mailto:" + (cfg.email || "") + "\">" + (cfg.email || "") + "</a>.";
       });
   });
 
-  function showConfirmation(data){
-    var mode = { in_person:"Présentiel à Pont-Audemer", remote:"Classe virtuelle", any:"Indifférent" }[data.preferred_mode] || "—";
-    var offer = { formation:"Formation IA 3 jours", equipe:"Former mon équipe", campus:"Campus numérique", atelier:"Atelier", autre:"Autre question" }[data.offer_interest] || "—";
-    document.getElementById("confirmSummary").innerHTML =
-      "<strong>Récapitulatif</strong><br>Besoin : "+offer+"<br>Modalité : "+mode+
-      (data.session_id ? "<br>Session : "+data.session_id : "") +
-      (data.availability ? "<br>Disponibilités : "+escapeHtml(data.availability) : "") +
-      "<br><br><strong>Prochaine étape :</strong> nous vous recontactons sous 48 h ouvrées.";
+  function showConfirmation(data, obj) {
+    var name = ((data.first_name || "") + " " + (data.last_name || "")).trim();
+    var sessionText = obj ? obj.label
+      : ("À définir selon vos disponibilités" + (data.availability ? (" (" + data.availability + ")") : ""));
+    var fundingLabels = { personnel: "Financement personnel", entreprise: "Financement par mon entreprise", cpf: "CPF", opco: "OPCO ou autre financement à étudier", inconnu: "Je ne sais pas encore" };
+    document.getElementById("confirmName").textContent = name || "—";
+    document.getElementById("confirmSession").textContent = sessionText;
+    document.getElementById("confirmFunding").textContent = fundingLabels[data.funding_type] || "—";
+
     document.getElementById("formPanel").hidden = true;
-    var c = document.getElementById("confirmPanel"); c.hidden = false; c.scrollIntoView({behavior:"smooth"}); c.focus && c.setAttribute("tabindex","-1"), c.focus();
+    document.querySelector(".rsv-progress").hidden = true;
+    var c = document.getElementById("confirmPanel");
+    c.hidden = false; c.setAttribute("tabindex", "-1");
+    document.getElementById("formTop").scrollIntoView({ behavior: "smooth", block: "start" });
+    try { c.focus({ preventScroll: true }); } catch (_) {}
   }
-  function escapeHtml(t){ return String(t).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+
+  function escapeHtml(t) { return String(t).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
+
+  // État initial
+  show(0);
 })();
 </script>
 </body>
