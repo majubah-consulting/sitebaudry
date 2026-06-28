@@ -467,7 +467,7 @@
   function sessionById(id) { for (var k = 0; k < SESSIONS.length; k++) if (SESSIONS[k].id === id) return SESSIONS[k]; return null; }
 
   // ---- Intégration Brevo (formulaire hébergé, sans clé API) ----
-  var BREVO_ACTION = "https://b3b996fd.sibforms.com/serve/MUIFAPyLxyiKw1kVbVyOE-3YyTMrvbPRdu5fbCQT1sCvhXNKY9KDYJ1gDFA5-9KpZ96qarZZu2FOuRk-0wMtMPBBag5Gn18LfdqSEdEIxHa7hdI8LS55VOJuMkqj57QxiyDXHy4LetP0Ua0b2I7XBmpoeZM5a8N6zXI3YEb2gzZDbGf4ulJuyaJXj4j_DtHLUgfAryd7kNLuffL_Ug==";
+  var BREVO_ACTION = "https://b3b996fd.sibforms.com/v2/serve/MUIFACV5EzTU4iErvt0HviB6VqFjJY7zYSZcBwvShJ9lVHFjzRJwk7y83637F8796Uge5rb7UUcmuQvMldVsWu8wbNY-rErDLFaRHvZMmh-KDx6DstMKtYBw3U6LLxtvLcJ1Hu_MT_Ucj2jPMtSyzDt8f6K6QTcaBGBFqTnF-8UScIIA6Y7HK_jV27rSG5zyqUdpU2dQ1sJExZHOaw==";
 
   var FUNDING_LABELS = {
     personnel: "Financement personnel",
@@ -556,7 +556,8 @@
       NOM: (data.last_name || "").trim(),
       LANDLINE_NUMBER: frPhoneNational(data.phone),
       LANDLINE_NUMBER__COUNTRY_CODE: "+33",
-      JOB_TITLE: (data.job_title || "").trim() || "Non précisé",
+      JOB_TITLE: (data.job_title || "").trim(),
+      "COMPANY:name": (data.company || "").trim() || "Non précisé",
       SESSION: sessionValue,
       FINANCEMENT: FUNDING_LABELS[data.funding_type] || data.funding_type || "—",
       email_address_check: "", // honeypot Brevo : doit rester vide
