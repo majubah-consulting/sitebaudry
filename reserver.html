@@ -579,7 +579,22 @@
     data.session_label = sessionValue;
     var fundingLabel = FUNDING_LABELS[data.funding_type] || data.funding_type || "—";
 
-    // 1) Brevo (base contacts marketing) — envoi en arrière-plan, sans bloquer
+    // Coordination des deux envois : on n'affiche la confirmation que lorsque
+    // l'alerte e-mail a réussi ET que Brevo a eu le temps d'aboutir (création du
+    // contact + e-mail d'opt-in au prospect). Évite de couper le POST Brevo.
+    var brevoDone = false, web3Done = false, web3Ok = false;
+    function settle() {
+      if (!web3Done) return;             // on attend le signal fiable (Web3Forms)
+      if (web3Ok && !brevoDone) return;  // succès : on laisse Brevo terminer
+      if (web3Ok) { showConfirmation(data, obj); return; }
+      sending = false;
+      submitBtn.disabled = false; prevBtn.disabled = false;
+      submitBtn.textContent = "Réessayer";
+      statusEl.setAttribute("data-kind", "error");
+      statusEl.innerHTML = "Votre demande n'a pas pu être envoyée. Vos informations sont conservées : cliquez sur « Réessayer », ou écrivez-nous à <a href=\"mailto:" + (cfg.email || "") + "\">" + (cfg.email || "") + "</a>.";
+    }
+
+    // 1) Brevo (base contacts + e-mail d'opt-in au prospect)
     sendToBrevo({
       EMAIL: (data.email || "").trim(),
       PRENOM: (data.first_name || "").trim(),
@@ -592,9 +607,9 @@
       FINANCEMENT: fundingLabel,
       email_address_check: "", // honeypot Brevo : doit rester vide
       locale: "fr"
-    }, function () {});
+    }, function () { brevoDone = true; settle(); });
 
-    // 2) Alerte e-mail à Baudry (Web3Forms) — canal principal, succès/erreur fiable
+    // 2) Alerte e-mail à Baudry (Web3Forms) — signal de succès fiable
     notifyByEmail({
       prenom: (data.first_name || "").trim(),
       nom: (data.last_name || "").trim(),
@@ -605,14 +620,7 @@
       session: sessionValue,
       funding: fundingLabel,
       marketing: form.elements["consent_marketing"].checked
-    }, function (ok) {
-      if (ok) { showConfirmation(data, obj); return; }
-      sending = false;
-      submitBtn.disabled = false; prevBtn.disabled = false;
-      submitBtn.textContent = "Réessayer";
-      statusEl.setAttribute("data-kind", "error");
-      statusEl.innerHTML = "Votre demande n'a pas pu être envoyée. Vos informations sont conservées : cliquez sur « Réessayer », ou écrivez-nous à <a href=\"mailto:" + (cfg.email || "") + "\">" + (cfg.email || "") + "</a>.";
-    });
+    }, function (ok) { web3Done = true; web3Ok = ok; settle(); });
   });
 
   function showConfirmation(data, obj) {
