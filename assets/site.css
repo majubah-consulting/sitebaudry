@@ -58,6 +58,9 @@ ul { margin: 0; padding: 0; }
 .visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 
 /* ---- Boutons ---- */
+/* L'attribut HTML [hidden] doit toujours masquer, même sur .btn/.field qui définissent un display */
+[hidden] { display: none !important; }
+
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 8px;
   font: 700 15px/1 var(--font-body); text-decoration: none; cursor: pointer;
