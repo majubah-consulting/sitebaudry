@@ -246,9 +246,9 @@ spline-viewer { animation: robotFluid 14s ease-in-out infinite; will-change: fil
   box-shadow: 0 2px 10px rgba(14,28,34,.16);
 }
 .spline-badge img { height: 22px; width: auto; display: block; }
-@media (max-width: 560px) {
-  .spline-badge { min-width: 132px; min-height: 44px; padding: 7px 11px; bottom: 14px; }
-  .spline-badge img { height: 18px; }
+/* Sur mobile : pas d'étiquette logo sur le robot (demande explicite) */
+@media (max-width: 700px) {
+  .spline-badge { display: none; }
 }
 
 /* =======================================================================
