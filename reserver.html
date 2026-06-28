@@ -513,6 +513,35 @@
     window.setTimeout(function () { if (f.parentNode) f.parentNode.removeChild(f); }, 7000);
   }
 
+  // ---- Alerte e-mail à Baudry via Web3Forms (clé publique, sans backend) ----
+  var WEB3FORMS_KEY = "5902293a-4b80-475b-b171-8456557d7251";
+  function notifyByEmail(info, done) {
+    var name = (info.prenom + " " + info.nom).trim();
+    var payload = {
+      access_key: WEB3FORMS_KEY,
+      subject: "Nouvelle préinscription — " + (name || "candidat") + (info.session ? (" — " + info.session) : ""),
+      from_name: "Site MAJUBAH — Préinscription",
+      replyto: info.email,
+      "Prénom": info.prenom || "—",
+      "Nom": info.nom || "—",
+      "E-mail": info.email || "—",
+      "Téléphone": info.phone || "—",
+      "Entreprise": info.company || "—",
+      "Fonction": info.job || "—",
+      "Session souhaitée": info.session || "—",
+      "Financement envisagé": info.funding || "—",
+      "Souhaite recevoir les informations MAJUBAH": info.marketing ? "Oui" : "Non"
+    };
+    fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Accept": "application/json" },
+      body: JSON.stringify(payload)
+    })
+      .then(function (r) { return r.json(); })
+      .then(function (j) { done(!!(j && j.success)); })
+      .catch(function () { done(false); });
+  }
+
   // ---- Envoi ----
   form.addEventListener("submit", function (e) {
     e.preventDefault();
@@ -548,8 +577,9 @@
               : "Aucune des dates proposées — à recontacter")
           : "");
     data.session_label = sessionValue;
+    var fundingLabel = FUNDING_LABELS[data.funding_type] || data.funding_type || "—";
 
-    // Mapping vers les champs exacts du formulaire Brevo
+    // 1) Brevo (base contacts marketing) — envoi en arrière-plan, sans bloquer
     sendToBrevo({
       EMAIL: (data.email || "").trim(),
       PRENOM: (data.first_name || "").trim(),
@@ -559,9 +589,22 @@
       JOB_TITLE: (data.job_title || "").trim(),
       "COMPANY:name": (data.company || "").trim() || "Non précisé",
       SESSION: sessionValue,
-      FINANCEMENT: FUNDING_LABELS[data.funding_type] || data.funding_type || "—",
+      FINANCEMENT: fundingLabel,
       email_address_check: "", // honeypot Brevo : doit rester vide
       locale: "fr"
+    }, function () {});
+
+    // 2) Alerte e-mail à Baudry (Web3Forms) — canal principal, succès/erreur fiable
+    notifyByEmail({
+      prenom: (data.first_name || "").trim(),
+      nom: (data.last_name || "").trim(),
+      email: (data.email || "").trim(),
+      phone: (data.phone || "").trim(),
+      company: (data.company || "").trim(),
+      job: (data.job_title || "").trim(),
+      session: sessionValue,
+      funding: fundingLabel,
+      marketing: form.elements["consent_marketing"].checked
     }, function (ok) {
       if (ok) { showConfirmation(data, obj); return; }
       sending = false;
