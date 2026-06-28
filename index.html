@@ -19,7 +19,7 @@
   <!-- Runtime Spline (robot 3D animé du hero) -->
   <script type="module" src="https://unpkg.com/@splinetool/viewer@1.10.34/build/spline-viewer.js"></script>
   <script defer src="assets/site.config.js"></script>
-  <script defer src="assets/site.js"></script>
+  <script defer src="assets/site.js?v=2"></script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -335,10 +335,12 @@
         <p class="eyebrow">Newsletter IA</p>
         <h2>Recevez ma veille IA chaque semaine.</h2>
         <p class="lead center" style="margin-top:10px;">Les meilleurs outils, des tips concrets et l'actualité de l'IA — directement dans votre boîte mail, pour rester à jour et passer à l'action.</p>
-        <form id="newsletterForm" novalidate>
-          <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="hp-field">
+        <form id="newsletterForm" action="https://b3b996fd.sibforms.com/serve/MUIFADxfiHn9qNZXtvQEBSMaMoarr7wtBF8wa0-gKo_DyhLLX-jKzlkcaODo511_da2BGjpr7rqDbor45vDEy2A7aIcy6Utt17x490pOmHr0Lui6PyrUgigBVHqVq8gdvVmXtejeiJAjjdu4UPTl8Kx5_ETc1d_s2SAzdaVjvYYchJBjEmb3AV9fGSsHTvuH3bbPCLxKP3EyhPlJMw==" method="POST">
+          <!-- Champ anti-robot Brevo : doit rester vide -->
+          <input type="text" name="email_address_check" value="" tabindex="-1" autocomplete="off" aria-hidden="true" class="hp-field">
+          <input type="hidden" name="locale" value="fr">
           <div class="newsletter">
-            <input type="email" name="email" required placeholder="vous@email.com" autocomplete="email" aria-label="Votre adresse email" class="newsletter__input">
+            <input type="email" name="EMAIL" required placeholder="vous@email.com" autocomplete="email" aria-label="Votre adresse email" class="newsletter__input">
             <button type="submit" class="btn btn--accent">Je m'abonne</button>
           </div>
           <label class="newsletter__consent">

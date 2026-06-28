@@ -157,29 +157,9 @@
       start();
     })();
 
-    // ---- Newsletter (section robot) → api/newsletter ----
-    (function () {
-      var form = document.getElementById("newsletterForm");
-      if (!form) return;
-      var statusEl = document.getElementById("newsletterStatus");
-      function setStatus(kind, msg) {
-        if (kind) statusEl.setAttribute("data-kind", kind); else statusEl.removeAttribute("data-kind");
-        statusEl.textContent = msg;
-      }
-      form.addEventListener("submit", function (e) {
-        e.preventDefault();
-        if (form.website && form.website.value) return; // honeypot
-        var email = (form.email.value || "").trim();
-        if (!email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { setStatus("error", "Adresse email invalide."); form.email.focus(); return; }
-        if (form.consent && !form.consent.checked) { setStatus("error", "Merci de cocher la case de consentement."); return; }
-        var btn = form.querySelector("button[type=submit]");
-        btn.disabled = true; setStatus("", "Inscription en cours…");
-        fetch("/api/newsletter", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email: email, consent: true, website: "" }) })
-          .then(function (r) { if (!r.ok) throw new Error(String(r.status)); return r.json().catch(function () { return {}; }); })
-          .then(function () { form.reset(); setStatus("success", "Merci ! Vérifiez votre boîte mail pour confirmer votre inscription."); })
-          .catch(function () { btn.disabled = false; setStatus("error", "Une erreur est survenue. Réessayez plus tard."); });
-      });
-    })();
+    // ---- Newsletter (section robot) : le formulaire est envoyé nativement à Brevo
+    //      (action sibforms dans le HTML). Brevo gère la confirmation et le double opt-in.
+    //      Pas d'interception JS ici, sinon l'envoi vers Brevo serait bloqué.
 
     // ---- Apparition en cascade : les enfants des grilles révélées entrent un par un ----
     document.querySelectorAll(".reveal.grid, .reveal.mode-grid").forEach(function (g) {
