@@ -12,7 +12,7 @@ window.MAJUBAH = {
   email: "baudry@majubah.com",
   phone: "", // laisser vide tant que non public (n'affiche rien si vide)
   linkedin: "https://www.linkedin.com/in/baudry-bahuna/", // profil LinkedIn de Baudry
-  campusUrl: "https://majubah-campus.com",
+  campusUrl: "https://majubah.teachizy.fr/formations/campus-ia",
 
   // Recommandations LinkedIn (preuve sociale réelle et publique).
   linkedinRecommendations: "https://www.linkedin.com/in/baudry-bahuna/details/recommendations/?detailScreenTabIndex=0",
@@ -87,7 +87,7 @@ window.MAJUBAH = {
     monthlyPrice: 29,
     annualPrice: 290,
     alumniRenewalPrice: 190,
-    url: "https://majubah-campus.com",
+    url: "https://majubah.teachizy.fr/formations/campus-ia",
   },
 
   workshops: {
