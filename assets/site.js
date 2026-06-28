@@ -27,6 +27,22 @@
       });
     }
 
+    // ---- Sous-menu déroulant « Formations certifiantes » (bouton accessible) ----
+    if (nav) {
+      nav.querySelectorAll(".nav__sub-toggle").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          var open = btn.getAttribute("aria-expanded") === "true";
+          btn.setAttribute("aria-expanded", String(!open));
+        });
+      });
+      // Échap referme le sous-menu et redonne le focus au bouton
+      nav.addEventListener("keydown", function (e) {
+        if (e.key !== "Escape") return;
+        var open = nav.querySelector('.nav__sub-toggle[aria-expanded="true"]');
+        if (open) { open.setAttribute("aria-expanded", "false"); open.focus(); }
+      });
+    }
+
     // ---- Lien de navigation actif ----
     var path = location.pathname.replace(/index\.html$/, "").replace(/\/$/, "") || "/";
     document.querySelectorAll(".nav__link").forEach(function (a) {

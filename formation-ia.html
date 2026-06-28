@@ -12,9 +12,9 @@
   <meta property="og:locale" content="fr_FR">
   <link rel="stylesheet" href="_ds/majubah-consulting-design-system-a0b60080-30af-45d8-a878-bd93d04e39d7/tokens/fonts.css">
   <link rel="stylesheet" href="_ds/majubah-consulting-design-system-a0b60080-30af-45d8-a878-bd93d04e39d7/tokens/colors.css">
-  <link rel="stylesheet" href="assets/site.css?v=2">
+  <link rel="stylesheet" href="assets/site.css?v=3">
   <script defer src="assets/site.config.js"></script>
-  <script defer src="assets/site.js?v=2"></script>
+  <script defer src="assets/site.js?v=3"></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Aller au contenu</a>
@@ -24,7 +24,13 @@
     <nav class="nav" data-open="false" aria-label="Navigation principale">
       <a class="nav__logo" href="index.html" aria-label="MAJUBAH Consulting — accueil"><img src="assets/logo/majubah-horizontal.png" alt="MAJUBAH Consulting"></a>
       <ul class="nav__menu" role="list">
-        <li><a class="nav__link" href="formation-ia.html">Formation IA</a></li>
+        <li class="nav__has-sub">
+          <button type="button" class="nav__sub-toggle" aria-expanded="false" aria-haspopup="true">Formations certifiantes <svg class="nav__chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+          <ul class="nav__sub" role="list">
+            <li><a class="nav__link" href="formation-ia.html">Développer son activité avec l'IA<small>Certifiante · RS7344</small></a></li>
+            <li><a class="nav__link" href="formation-creer-activite-formation.html">Créer une activité de formation<small>Certifiante · RS6977</small></a></li>
+          </ul>
+        </li>
         <li><a class="nav__link" href="campus-numerique.html">Campus numérique</a></li>
         <li><a class="nav__link" href="ateliers-ia.html">Ateliers</a></li>
         <li><a class="nav__link" href="contact.html">Contact</a></li>

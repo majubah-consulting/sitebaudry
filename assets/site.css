@@ -94,6 +94,24 @@ ul { margin: 0; padding: 0; }
 .nav__campus:hover { color: var(--text-strong); }
 .nav__toggle { display: none; }
 
+/* ---- Sous-menu déroulant « Formations certifiantes » ---- */
+.nav__has-sub { position: relative; }
+.nav__sub-toggle { display: inline-flex; align-items: center; gap: 5px; background: none; border: 0; padding: 0; cursor: pointer; font: 600 15px var(--font-body); color: var(--text-body); }
+.nav__sub-toggle:hover { color: var(--text-strong); }
+.nav__chev { transition: transform .2s var(--ease); }
+.nav__sub {
+  position: absolute; top: 100%; left: 50%; transform: translateX(-50%) translateY(8px);
+  min-width: 320px; margin: 0; padding: 8px; list-style: none;
+  background: #fff; border: 1px solid var(--border-subtle); border-radius: var(--radius); box-shadow: var(--shadow-md);
+  display: flex; flex-direction: column; gap: 2px;
+  opacity: 0; visibility: hidden; transition: opacity .18s var(--ease), transform .18s var(--ease); z-index: 60;
+}
+.nav__has-sub:hover .nav__sub, .nav__has-sub:focus-within .nav__sub { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
+.nav__has-sub:hover .nav__chev, .nav__has-sub:focus-within .nav__chev { transform: rotate(180deg); }
+.nav__sub .nav__link { display: block; padding: 10px 12px; border-radius: var(--radius-sm); font-size: 14px; line-height: 1.3; }
+.nav__sub .nav__link:hover, .nav__sub .nav__link[aria-current="page"] { background: var(--surface-muted); color: var(--text-strong); }
+.nav__sub .nav__link small { display: block; font-weight: 600; color: var(--text-muted); font-size: 12px; margin-top: 2px; }
+
 @media (max-width: 880px) {
   .nav { flex-wrap: wrap; }
   .nav__menu, .nav__cta { display: none; }
@@ -115,6 +133,12 @@ ul { margin: 0; padding: 0; }
   .nav[data-open="true"] .nav__link::after { display: none; }
   .nav[data-open="true"] .nav__campus { padding: 13px 2px; font-size: 16px; }
   .nav[data-open="true"] .btn { width: 100%; min-height: 52px; }
+  /* Sous-menu déroulant en version mobile : empilé et replié par défaut */
+  .nav[data-open="true"] .nav__has-sub { display: flex; flex-direction: column; align-items: stretch; width: 100%; }
+  .nav[data-open="true"] .nav__sub-toggle { justify-content: space-between; width: 100%; padding: 13px 2px; border-bottom: 1px solid var(--border-subtle); font-size: 17px; }
+  .nav[data-open="true"] .nav__sub { position: static; transform: none; opacity: 1; visibility: visible; min-width: 0; padding: 0 0 0 12px; margin: 0; border: 0; box-shadow: none; gap: 0; display: none; }
+  .nav[data-open="true"] .nav__sub-toggle[aria-expanded="true"] + .nav__sub { display: flex; }
+  .nav[data-open="true"] .nav__sub .nav__link { padding: 12px 2px; border-bottom: 1px dashed var(--border-subtle); font-size: 15px; }
 }
 
 /* ---- Hero ---- */
